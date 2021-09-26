@@ -8,13 +8,8 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <style type="text/css">
 table {
-	width: 30%;
+	width: 80%;
 }
-body { background-color: white; font-size: 15pt; }
-table { background-color: #005aa7; }
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 15px;}
-.left { text-align: left; }
 </style>
 
 <script type="text/javascript">  // 자바 스크립트 시작
@@ -36,10 +31,9 @@ td { background-color: white; text-align: center; padding: 15px;}
 
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 <table border="1">
 	<caption><h2>회원정보 상세내역</h2></caption>
-	<tr><td width="130">아이디</td><td>${member.id}</td></tr>
+	<tr><td width="50">아이디</td><td>${member.id}</td></tr>
 	<tr><td>비밀번호</td><td>${member.password}</td></tr>
 	<tr><td>관리자여부</td><td>${member.admin}</td></tr>
 	<tr><td>이름</td><td>${member.name}</td></tr>
@@ -53,14 +47,14 @@ td { background-color: white; text-align: center; padding: 15px;}
 	<tr><td>자기소개</td><td>${member.intro}</td></tr>
 	<tr><td>포인트</td><td>${member.point}</td></tr>
 	<tr><td>가입날짜</td><td>${member.reg_date}</td></tr>	
-	<form name = "deleteform" method="post" action="memberDeletePro.do?memberid=${memberid}&pageNum=${pageNum}">
+	<form name = "deleteform" method="post" action="memberDeletePro.do?id=${id}&pageNum=${pageNum}">
 	<tr><td colspan="2">
-		<input type="button" value="수정" style="color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0; padding: 15px; font-size: 20px;"
-		onclick="location.href='memberUpdateForm.do?memberid=${member.id}&pageNum=${pageNum}'">
+		<input type="button" value="수정" 
+		onclick="location.href='memberUpdateForm.do?id=${id}&pageNum=${pageNum}'">
 	
-		<input type="button" value="삭제" style="color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0; padding: 15px; font-size: 20px; margin-left: 15px;" onclick="javascript:deleteCheck()">
+		<input type="button" value="삭제" onclick="javascript:deleteCheck()">
 	
-		<input type="button" value="목록" style="color:white; background: #005aa7; text-decoration:none; border: 0; outline: 0; padding: 15px; font-size: 20px; margin-left: 15px;" 
+		<input type="button" value="목록"
 		onclick="location.href='memberList.do?pageNum=${pageNum}'"></td></tr>
 	</form>
 </table>

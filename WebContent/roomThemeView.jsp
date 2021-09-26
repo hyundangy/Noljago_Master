@@ -165,20 +165,16 @@
        font-family: helvetica, serif;
    }
 
- /*   #t{
+   #t{
       text-align: center;
       float: center;
       margin-left: 800px;
-   } */
+   }
 
-  	 #tableCenter{
-     	text-align: center;
-   	}
-	.block {
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 65px;
-	}
+   #tableCenter{
+      text-align: center;
+   }
+
    </style>
 
 
@@ -234,13 +230,12 @@
             currentText: '오늘',
            	closeText: '닫기',
          	changeMonth: true,
-	        dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-	        dayNamesMin: [ '일', '월', '화', '수', '목', '금', '토'],
+	        dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+	        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
 	        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	        minDate: 1,
-         });
-         $("#datepicker").datepicker("setDate", '1');   //내일 날짜로 init
+	        minDate: 0,
+         }).datepicker("setDate", new Date());   //오늘 날짜로 init
      });
 
     function getDate() {
@@ -280,13 +275,13 @@
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container-fluid">
+
    <img src="images/${cafe.image2 }" class="img-responsive" alt="Responsive image" style="margin: auto;">
 
 
    <div id="top" style="margin-top: 50px">
       <ul id="reserveList">
-         <li id="reserveList2" style="background-color: #1ca2e3;">01. 날짜/시간 선택</li>
+         <li id="reserveList2" style="background-color: red;">01. 날짜/시간 선택</li>
          <li id="reserveList2">02. 예약 정보 입력</li>
          <li id="reserveList2">03. 예약 완료</li>
       </ul>
@@ -308,8 +303,7 @@
    <h2 style="margin-left: 50px;"><b>${theme.tname}</b></h2>
    </div>
    <hr>
-   <div class="table-responsive">
-   <table class="block" id="t">
+   <table style="margin-top: 30px; margin-bottom: 60px; margin-left: 230px;" id="t" >
       <tr>
          <td rowspan="5"><img alt="" src="images/${theme.timage }" width="280" height="280" style="margin-right: 50px; "></td>
       </tr>
@@ -360,9 +354,8 @@
      
 
     </table>
-    </div>
     </form>
-</div>
+
 </body>
 </html>
 <%@include file="footer.jsp" %>

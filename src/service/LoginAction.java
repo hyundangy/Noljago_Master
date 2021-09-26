@@ -2,15 +2,12 @@ package service;
 
 import java.io.IOException;
 import java.rmi.ServerException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Member;
 import dao.MemberDAO;
-import dao.Review;
-import dao.ReviewDAO;
 
 public class LoginAction implements CommandProcess {
 
@@ -33,22 +30,8 @@ public class LoginAction implements CommandProcess {
 			}
 			request.setAttribute("member", member);
 			request.setAttribute("result", result);
-			if(result == 1) {	//로그인 성공시에
-				
-				ReviewDAO reviewDAO = ReviewDAO.getInstance();
-				
-				//방탈출 인기 best3
-				List<Review> review = reviewDAO.r_p_rank();
-				
-				//vr 인기 best3
-				List<Review> v_review = reviewDAO.v_p_rank();
-				
-				request.setAttribute("r_review", review);
-				request.setAttribute("v_review", v_review);
+			if(result == 1) 
 				return "main.jsp";
-			}
-				
-				
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

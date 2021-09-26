@@ -231,8 +231,8 @@ public class CafeDAO {
 			Connection conn = null;
 			PreparedStatement pstmt= null; PreparedStatement pstmt1 = null;
 			ResultSet rs = null; ResultSet rs1 = null;
-			String sql = "select * from cafe where type='room' order by cnum desc";
-			String sql1 = "select count(*),trunc(avg(rate)) from review where cnum = ?";
+			String sql = "select * from cafe where type='room' ";
+			String sql1 = "select count(*),avg(rate) from review where cnum = ?";
 			int cnum = 0;
 			try{
 				conn=getConnection();
@@ -317,7 +317,7 @@ public class CafeDAO {
 		//삭제되지 않은 카페 리스트를 전부 불러옴
 		public List<Cafe> CafeList() throws SQLException {
 			List<Cafe> cafelist = new ArrayList<Cafe>();
-			String sql = "select * from cafe where cafe_del_yn = 'N' order by cnum";
+			String sql = "select * from cafe where cafe_del_yn = 'N'";
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -1188,31 +1188,5 @@ public class CafeDAO {
 			}
 			return cnum;
 		}
-		
-//		cnum으로 카페 가격 가져옴
-		public int getprice(int cnum) throws SQLException {
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			int price = 0;
-			String sql = "select price from cafe where cnum = ?";
-			try  {
-				conn = getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, cnum);
-				rs = pstmt.executeQuery();
-				if (rs.next())
-					price = rs.getInt(1);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			} finally {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			}
-			return price;
-		}
+
 }

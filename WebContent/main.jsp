@@ -206,7 +206,7 @@
 						<input type="hidden" name="id" value="${id}">
 					<div class="input-group">
 						<input name="keyword" class="form-control input-lg" type="search"
-						placeholder="주소, 가게명으로 검색: 예)마포 브이알존" id="searchBar"/>
+						placeholder="주소, 가게명으로 검색: 예)강남 이스케이프" id="searchBar"/>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-lg" type="submit" id="searchButton">GO!</button>
 						</span>
@@ -229,7 +229,7 @@
 				<img class="center-block" src="images/medalicon.svg">
 			</div>
 			<div class="text-title text-center">
-				<a href="bestGame.do?id=${id }"><span id="text-head">놀자GO! 인기 BEST!</span></a>
+				<a href="bestGame.do?id=${id }"><span id="text-head">놀자GO! 이달의 BEST!</span></a>
 			</div>
 			<div class="slide-box center-block">
 				<!------------------------ vr 랭킹 ------------------------->

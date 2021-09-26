@@ -25,13 +25,9 @@ public class PartySearchAction implements CommandProcess {
 		String cname = null;
 		String startdate = null;
 		String enddate = null;
-		String selectdate = null;
 		try { 
 			// 회원정보 가져오는 DAO메소드
-			if(option==0){
-				selectdate = request.getParameter("datepickerSelect");
-				list = pd.partySearch4(selectdate, selectdate);
-			}else if(option==1){ //대분류
+			if(option==1){ //대분류
 				type = request.getParameter("type"); //대분류
 				list = pd.partySearch1(type);
 			}else if(option==2){ //파티장 아이디

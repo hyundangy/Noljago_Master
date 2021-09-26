@@ -32,11 +32,10 @@ public class PartyDAO {
 		}
 		return conn;
 	}
-	//파티 전체 갯수 
 	public int getTotalCnt() throws SQLException {
 		Connection conn = null;	Statement stmt= null; 
 		ResultSet rs = null;    int tot = 0;
-		String sql = "select count(*) from party where hopedate >= To_CHAR(sysdate,'YYYY/MM/DD')";
+		String sql = "select count(*) from party";
 		try {
 			conn = getConn();
 			stmt = conn.createStatement();
@@ -50,28 +49,6 @@ public class PartyDAO {
 		}
 		return tot;
 	}
-	
-	//자기 파티 찾기 갯수
-	public int getTotalMyCnt(String id) throws SQLException {
-		Connection conn = null;	PreparedStatement pstmt= null; 
-		ResultSet rs = null;    int tot = 0;
-		String sql = "select count(*) from party p, partymem pm where pm.id=? and pm.pnum = p.pnum and p.hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by p.pnum desc";
-		try {
-			conn = getConn();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) tot = rs.getInt(1);
-		} catch(Exception e) {	System.out.println(e.getMessage()); 
-		} finally {
-			if (rs !=null) rs.close();
-			if (pstmt != null) pstmt.close();
-			if (conn !=null) conn.close();
-		}
-		return tot;
-	}
-	
 	//파티 게시판에서 파티 간략정보, 파티 상세정보를 출력 partyBoard line.169 to line.241
 	public List<Party> list(int startRow, int endRow) throws SQLException {
 		List<Party> list = new ArrayList<Party>();
@@ -82,7 +59,7 @@ public class PartyDAO {
 		ResultSet rs1 = null; ResultSet rs2 = null; ResultSet rs3 = null; ResultSet rs4 = null;
 		ResultSet rs5 = null; ResultSet rs6 = null;
 		//sql1 = 게시판 형식으로 출력 / 큰 pnum부터 출력
-		 String sql1 = "select * from (select rownum rn ,a.* from (select * from party where hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc) a ) where rn between ? and ?";
+		 String sql1 = "select * from (select rownum rn ,a.* from (select * from party order by pnum desc) a ) where rn between ? and ?";
 		 //sql2 = 각 파티가 가는 카페 정보 - 파티에 입력된 카페 번호 기준
 		 String sql2 = "select * from cafe where cnum=?";
 		 //sql3 = 각 파티가 가는 테마 정보 - 카페+테마 번호 기준
@@ -635,7 +612,7 @@ public class PartyDAO {
 		ResultSet rs1 = null; ResultSet rs2 = null; ResultSet rs3 = null; 
 		ResultSet rs4 = null; ResultSet rs5 = null; ResultSet rs6 = null;
 		//sqlS1 = 검색조건을 기준으로 pnum 출력
-		String sqlS1 = "select pnum from party where cnum=? and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
+		String sqlS1 = "select pnum from party where cnum=? order by pnum desc";
 		//SqlS2 = sqlS1에 들어갈 검색조건
 		String sqlS2 = "select cnum from cafe where upper(type)=upper(?)";
 		//sql1 = 큰 pnum부터 출력
@@ -656,6 +633,7 @@ public class PartyDAO {
 						pstmtS2.setString(1, type);
 						rsS2 = pstmtS2.executeQuery();
 						while(rsS2.next()){
+							Party party = new Party();
 							pstmtS1 = conn.prepareStatement(sqlS1);
 							pstmtS1.setInt(1, rsS2.getInt(1));
 							rsS1 = pstmtS1.executeQuery();
@@ -663,9 +641,7 @@ public class PartyDAO {
 								pstmt1 = conn.prepareStatement(sql1);
 								pstmt1.setInt(1, rsS1.getInt(1));
 								rs1 = pstmt1.executeQuery();
-								System.out.println(rsS1.getInt(1));
 								while (rs1.next()) {
-									Party party = new Party();
 									pstmt2 = conn.prepareStatement(sql2);
 									pstmt2.setInt(1, rs1.getInt("cnum"));
 									rs2 = pstmt2.executeQuery();
@@ -719,8 +695,8 @@ public class PartyDAO {
 										party.setReviewCount(rs6.getInt(1));
 										party.setReviewAvg(rs6.getDouble(2));
 										}
-									list.add(party);
 									}
+								list.add(party);
 								}
 							}
 			} catch(Exception e) {	System.out.println(e.getMessage()); 
@@ -755,10 +731,9 @@ public class PartyDAO {
 		ResultSet rs1 = null; ResultSet rs2 = null; ResultSet rs3 = null; 
 		ResultSet rs4 = null; ResultSet rs5 = null; ResultSet rs6 = null;
 		//sqlS1 = 검색조건을 기준으로 pnum 출력
-		String sqlS1 = "select pnum from partymem where pmnum=1 and upper(id) like upper(?) "
-					+ "order by pnum desc";
+		String sqlS1 = "select pnum from partymem where pmnum=1 and upper(id) like upper(?) order by pnum desc";
 		//sql1 = 큰 pnum부터 출력
-		String sql1 = "select * from party where pnum=? and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
+		String sql1 = "select * from party where pnum=? order by pnum desc";
 		//sql2 = 각 파티가 가는 카페 정보 - 파티에 입력된 카페 번호 기준
 		String sql2 = "select * from cafe where cnum=?";
 		//sql3 = 각 파티가 가는 테마 정보 - 카페+테마 번호 기준
@@ -776,11 +751,11 @@ public class PartyDAO {
 				pstmtS1.setString(1, leaderId);
 				rsS1 = pstmtS1.executeQuery();
 				while(rsS1.next()){
+					Party party = new Party();
 					pstmt1 = conn.prepareStatement(sql1);
 					pstmt1.setInt(1, rsS1.getInt(1));
 					rs1 = pstmt1.executeQuery();
 					while (rs1.next()) {
-						Party party = new Party();
 						pstmt2 = conn.prepareStatement(sql2);
 						pstmt2.setInt(1, rs1.getInt("cnum"));
 						rs2 = pstmt2.executeQuery();
@@ -834,8 +809,8 @@ public class PartyDAO {
 							party.setReviewCount(rs6.getInt(1));
 							party.setReviewAvg(rs6.getDouble(2));
 							}
-						list.add(party);
 						}
+					list.add(party);
 					}
 			} catch(Exception e) {	System.out.println(e.getMessage()); 
 			} finally {	
@@ -867,7 +842,7 @@ public class PartyDAO {
 		ResultSet rs1 = null; ResultSet rs2 = null; ResultSet rs3 = null; 
 		ResultSet rs4 = null; ResultSet rs5 = null; ResultSet rs6 = null;
 		//sqlS1 = 검색조건을 기준으로 pnum 출력
-		String sqlS1 = "select pnum from party where cnum=? and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
+		String sqlS1 = "select pnum from party where cnum=? order by pnum desc";
 		//SqlS2 = sqlS1에 들어갈 검색조건
 		String sqlS2 = "select cnum from cafe where upper(cname) like upper(?)";
 		//sql1 = 큰 pnum부터 출력
@@ -1125,7 +1100,7 @@ public class PartyDAO {
 		//sqlS1 = 검색조건을 기준으로 pnum 출력
 		String sqlS1 = "select pnum from partymem where id=? order by pnum desc";
 		//sql1 = 큰 pnum부터 출력
-		String sql1 = "select * from party where pnum=? and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
+		String sql1 = "select * from party where pnum=? order by pnum desc";
 		//sql2 = 각 파티가 가는 카페 정보 - 파티에 입력된 카페 번호 기준
 		String sql2 = "select * from cafe where cnum=?";
 		//sql3 = 각 파티가 가는 테마 정보 - 카페+테마 번호 기준
@@ -1142,11 +1117,11 @@ public class PartyDAO {
 				pstmtS1.setString(1, id);
 				rsS1 = pstmtS1.executeQuery();
 				while(rsS1.next()){
+					Party party = new Party();
 					pstmt1 = conn.prepareStatement(sql1);
 					pstmt1.setInt(1, rsS1.getInt(1));
 					rs1 = pstmt1.executeQuery();
 					while (rs1.next()) {
-						Party party = new Party();
 						pstmt2 = conn.prepareStatement(sql2);
 						pstmt2.setInt(1, rs1.getInt("cnum"));
 						rs2 = pstmt2.executeQuery();
@@ -1158,7 +1133,7 @@ public class PartyDAO {
 							party.setType(rs2.getString("type"));
 							party.setOpen(rs2.getInt("open"));
 							party.setClose(rs2.getInt("close"));
-							party.setPrice(rs1.getInt("point"));
+							party.setPrice(rs2.getInt("price"));
 							party.setRedprice(rs2.getInt("redprice"));
 							party.setImage1(rs2.getString("image1"));
 							party.setImage2(rs2.getString("image2"));
@@ -1178,7 +1153,6 @@ public class PartyDAO {
 						party.setHopedate(rs1.getString("hopedate"));
 						party.setHopehour(rs1.getInt("hopehour"));
 						party.setMax(rs1.getInt("max"));
-						System.out.println("party getMAX------>" + party.getMax());
 						party.setPcontent(rs1.getString("pcontent"));
 						pstmt4 = conn.prepareStatement(sql4);
 						pstmt4.setInt(1, rs1.getInt("pnum"));
@@ -1186,7 +1160,6 @@ public class PartyDAO {
 						rs4 = pstmt4.executeQuery();
 						while(rs4.next()){
 							party.setPmcount(rs4.getInt(1));
-							System.out.println("party getPMCOUNT------>" + party.getPmcount());
 						}
 						pstmt5 = conn.prepareStatement(sql5);
 						pstmt5.setInt(1, rs1.getInt("pnum"));
@@ -1202,8 +1175,8 @@ public class PartyDAO {
 							party.setReviewCount(rs6.getInt(1));
 							party.setReviewAvg(rs6.getDouble(2));
 							}
-						list.add(party);
 						}
+					list.add(party);
 					}
 			} catch(Exception e) {	System.out.println(e.getMessage()); 
 			} finally {	
@@ -1235,7 +1208,7 @@ public class PartyDAO {
 		ResultSet rs1 = null; ResultSet rs2 = null; ResultSet rs3 = null; 
 		ResultSet rs4 = null; ResultSet rs5 = null; ResultSet rs6 = null;
 		//sqlS1 = 검색조건을 기준으로 pnum 출력
-		String sqlS1 = "select pnum from party where cnum=? and tnum=? and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
+		String sqlS1 = "select pnum from party where cnum=? and tnum=? order by pnum desc";
 		//sql1 = 큰 pnum부터 출력
 		String sql1 = "select * from party where pnum=? order by pnum desc";
 		//sql2 = 각 파티가 가는 카페 정보 - 파티에 입력된 카페 번호 기준
@@ -1369,125 +1342,78 @@ public class PartyDAO {
 	}
 	
 	//partyRecommend.jsp
-	//같은 카페, 같은 테마번호로 다른 파티가 있나 확인
-	public List<Integer> recommendParty(int cnum, int tnum, String id) throws SQLException {
-		List<Integer> pnumlist = new ArrayList<Integer>();
-		List<Integer> partylist = new ArrayList<Integer>();
-		Connection conn = null;
-		PreparedStatement pstmt = null, pstmt1 = null, pstmt2 = null;
-		ResultSet rs = null, rs1=null, rs2=null;
-		int first = 0;
-		
-		//입력한 카페, 테마로 내가 이미 소속되어있는 파티가 있나 확인
-		String sql = "select Distinct pm.pnum from partymem pm, party p "
-				+ "where pm.id =? and p.cnum = ? and p.tnum = ? and pm.pnum = p.pnum and p.hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') "
-				+ "order by pnum desc";
-		
-		// 내가 소속되어있는 파티는 제외 시켜주는 sql문
-		String sql1start = "select pnum, hopedate from (";
-		String sql1end = ") where pnum != ?";
-		String sql1order = " and hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";
-		//String sql1order2 = " and p.hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by p.pnum desc";
-		String sql1 = null;
-		
-		String sql2 = "select pnum from party where cnum=? and tnum=? and "
-				+ "hopedate >= To_CHAR(sysdate,'YYYY/MM/DD') order by pnum desc";	//첫번째 조건 동일한 카페 동일한 테마
-		
-		try {
-			conn = getConn();
-			pstmt2 =  conn.prepareStatement(sql2);
-			pstmt2.setInt(1, cnum);
-			pstmt2.setInt(2, tnum);
-			rs2 = pstmt2.executeQuery();
-			if (rs2.next()) {	//같은 카페, 같은 테마 있음
+		//같은 카페, 같은 테마번호로 다른 파티가 있나 확인
+		public List<Integer> recommendParty(int cnum, int tnum, String id) throws SQLException {
+			List<Integer> pnumlist = new ArrayList<Integer>();
+			List<Integer> partylist = new ArrayList<Integer>();
+			Connection conn = null;
+			PreparedStatement pstmt = null, pstmt1 = null;
+			ResultSet rs = null, rs1=null;
+			
+			//입력한 카페, 테마로 내가 이미 소속되어있는 파티가 있나 확인
+			String sql = "select Distinct pm.pnum from partymem pm, party p "
+					+ "where pm.id =? and p.cnum = ? and p.tnum = ? and pm.pnum = p.pnum order by pnum desc";
+			
+			// 내가 소속되어있는 파티는 제외 시켜주는 sql문
+			String sql1start = "select pnum from (";
+			String sql1end = ") where pnum != ?";
+			String sql1order = " order by pnum desc";
+			String sql1 = null;
+			
+			try {
+				conn = getConn();
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 	            pstmt.setInt(2, cnum);
 	            pstmt.setInt(3, tnum);
 	            rs = pstmt.executeQuery();
-	            if (rs.next()) {	//자신이 속한 파티의 pnum을 받아옴
-	            	do {
-	            		pnumlist.add(rs.getInt(1));	//	pnumlist에 내가 소속되어있는 파티의 pnum들을 넣어줌
-	            		System.out.println(rs.getInt(1));
-	            	} while(rs.next());	//내가 속한 pnumlist 완성
-	            	
-	            	rs.close();
-	                pstmt.close();
-	                for (int i = 0; i < pnumlist.size(); i++) {
-	                	if (i == 0) {
-	                		/*sql1 = "select p.*, c.cname, c.caddress, c.open, c.close, c.price, "
-	                				+ "c.type, c.content, c.image1, c.image2, c.image3, pm.pmnum, "
-	                				+ "pm.id, t.tname, t.tcontent from party p, partymem pm, cafe c, theme t "
-	                				+ "where p.cnum=" +cnum+ " and p.tnum="+tnum+ " and p.pnum !=?"
-	                				+ " and p.pnum = pm.pnum and p.cnum = c.cnum and p.cnum = t.cnum and "
-	                				+ "c.cnum = t.cnum and p.tnum = t.tnum";*/
-	                		
-	                		sql1 = "select pnum, hopedate from party where cnum = "+cnum+ " and tnum = "+tnum+ " and pnum != ?";
-	                		
-	                		first = 0;
-	                		
-	                	} else {
-	                		first = 1;
-	                		sql1 = sql1start + sql1 + sql1end;
-	                	} 
-	                }
-	                
-	                System.out.println("partydao sql====>" + sql1 + sql1order);
-	                if (first == 0) {
-	                	pstmt = conn.prepareStatement(sql1 + sql1order);
-	                } else {
-	                	pstmt = conn.prepareStatement(sql1 + sql1order);	//모든 sql문이 완성되었으면 pstmt에 넣어줌
-	                }
-	                for (int i = 0; i < pnumlist.size(); i++) {
-	                	
-	                	pstmt.setInt(i+1, pnumlist.get(i));
-	                	System.out.println("pnumlist-->" + pnumlist.get(i));
-	                }
-	                rs = pstmt.executeQuery();
-	                if (rs.next()) {
-	                	do {
-	                		System.out.println("final pnum-->" + rs.getInt("pnum"));
-	                		partylist.add(rs.getInt("pnum"));
-	                	} while(rs.next());
-	                }
-	            
-	            	
-	            } else {
-            		/*sql = "select p.*, c.cname, c.caddress, c.open, c.close, c.price, "
-        				+ "c.type, c.content, c.image1, c.image2, c.image3, pm.pmnum, "
-        				+ "pm.id, t.tname, t.tcontent from party p, partymem pm, cafe c, theme t "
-        				+ "where p.cnum=" +cnum+ " and p.tnum="+tnum+" and p.pnum = pm.pnum"
-        				+ " and p.cnum = c.cnum and p.cnum = t.cnum and "
-        				+ "c.cnum = t.cnum and p.tnum = t.tnum";		//pnum 상관없이 뽑아냄*/
-            		
-            		rs.close();
-            		pstmt.close();
-            		do {
-            			partylist.add(rs2.getInt("pnum"));
-            			System.out.println("내가 속해있는 파티 없음: pnum---->"+ rs2.getInt("pnum"));
-            		} while (rs2.next()); 	//rs2에 저장되어 있던 pnum 그대로 뽑아옴
-          
-            		
-            		
+	            while (rs.next()) {
+	            	pnumlist.add(rs.getInt(1));	//추천할 카페가 존재하는 경우
+	            	System.out.println(rs.getInt(1));
 	            }
 	            
+	            rs.close();
+	            pstmt.close();
+	            for (int i = 0; i < pnumlist.size(); i++) {
+	            	if (i == 0) {
+	            		sql1 = "select p.*, c.cname, c.caddress, c.open, c.close, c.price, "
+	            				+ "c.type, c.content, c.image1, c.image2, c.image3, pm.pmnum, "
+	            				+ "pm.id, t.tname, t.tcontent from party p, partymem pm, cafe c, theme t "
+	            				+ "where p.cnum=" +cnum+ " and p.tnum="+tnum+ "and p.pnum !=?"
+	            				+ " and p.pnum = pm.pnum and p.cnum = c.cnum and p.cnum = t.cnum and "
+	            				+ "c.cnum = t.cnum and p.tnum = t.tnum";
+	            		
+	            		
+	            		/*sql1 = "select * from party where cnum="+cnum+ 
+	            				" and tnum="+tnum+" and pnum != ?";*/
+	            	} else {
+	            		sql1 = sql1start + sql1 + sql1end;
+	            	} 
+	            }
 	            
-			} else {
-				//return partylist;	//추천할 카페 없음
+	            System.out.println("partydao sql====>" + sql1 + sql1order);
+	            pstmt = conn.prepareStatement(sql1 + sql1order);
+	            for (int i = 0; i < pnumlist.size(); i++) {
+	            	
+	            	pstmt.setInt(i+1, pnumlist.get(i));
+	            }
+	            rs = pstmt.executeQuery();
+	            if (rs.next()) {
+	            	do {
+	            		partylist.add(rs.getInt("pnum"));
+	            	} while(rs.next());
+	            }
+	            	
+			} catch(Exception e) {
+				e.getMessage();
+			} finally {
+				 if(rs!=null) rs.close();
+		         if(pstmt!=null) pstmt.close();
+		         if(conn!=null) conn.close();
 			}
-			
-            
-            	
-		} catch(Exception e) {
-			e.getMessage();
-		} finally {
-			 if(rs!=null) rs.close();
-	         if(pstmt!=null) pstmt.close();
-	         if(conn!=null) conn.close();
+			return partylist;
 		}
-		return partylist;
-	}
-
+	
 	//상세정보에서 파티찾기
 	public Party partyinfo(int pnum) throws SQLException {
 		Party party = new Party();

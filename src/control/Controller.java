@@ -25,7 +25,7 @@ public class Controller extends HttpServlet {
    //command.properties의 String 과 object
    //command.properties를 담기 위해 map으로 선언
 	
-	public void init(ServletConfig config) throws ServletException {	//Singleton
+	public void init(ServletConfig config) throws ServletException {	//생성될 때 딱 한 번만 실행!
 		//web.xml에서 propertyConfig에 해당하는 init-param의 값을 읽어옴
 		String props = config.getInitParameter("config");	//web.xml의 param
 		System.out.println("props->"+props);

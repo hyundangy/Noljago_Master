@@ -16,9 +16,6 @@
 	.best-box {
 		margin-top: 65px;
 	}
-	h2 {
-		font-weight: bold;
-	}
 	#re-box,
 	#vr-box {
 		margin-bottom: 65px;	
@@ -43,11 +40,8 @@
 <body>
 <div class="container-fluid">
 	<div class="best-box">
-		<div class="row text-center">
-			<a><img class="center-block" src="images/medalicon.svg"></a>
-		</div>
-		<div style="margin-bottom: 50px;">
-			<h2 align="center">놀자GO! 인기 BEST!</h2>
+		<div style="margin-bottom: 50px; margin-top: 50px;">
+			<h2 align="center"><b>놀자Go! 이달의  BEST</b></h2>
 		</div>
 		
 		<!------------------------ vr 랭킹 ------------------------->

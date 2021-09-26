@@ -16,17 +16,12 @@ public class MemberContentAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			String id = "aa";
-			String password = "1234";			
-			String memberid = request.getParameter("memberid");
-			System.out.println(memberid);
+			String id = request.getParameter("id");
 			String pageNum = request.getParameter("pageNum");
 			MemberDAO md = MemberDAO.getInstance();
-			Member member = md.getUserInfo(memberid);
+			Member member = md.getUserInfo(id);
 			
 			request.setAttribute("id", id);
-			request.setAttribute("password", password);
-			request.setAttribute("memberid", memberid);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("member", member);
 			

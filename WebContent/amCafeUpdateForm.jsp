@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 <form action = "amCafeUpdatePro.do" method = "post">
 	<input type = "hidden" name = "cnum" value = "${cafe.cnum }">
 	<input type = "hidden" name = "pageNum" value = "${pageNum }">

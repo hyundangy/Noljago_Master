@@ -10,8 +10,6 @@
 	String endtime = (String)request.getAttribute("endtime");
 	String pnum = (String)request.getAttribute("pnum");
 	String cname = (String)request.getAttribute("cname");
-	String cnum = (String)request.getAttribute("cnum");
-	String type = (String)request.getAttribute("type");
 	String tname = (String)request.getAttribute("tname");
 	String count = (String)request.getAttribute("count");
 	String point = (String)request.getAttribute("point");
@@ -24,8 +22,6 @@
 	obj.put("endtime", endtime);
 	obj.put("pnum", pnum);
 	obj.put("cname", cname);
-	obj.put("cnum", cnum);
-	obj.put("type", type);
 	obj.put("tname", tname);
 	obj.put("count", count);
 	obj.put("point", point);

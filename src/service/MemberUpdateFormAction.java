@@ -15,16 +15,10 @@ public class MemberUpdateFormAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String id = "aa";
-			String password = "1234";
-			String memberid = request.getParameter("memberid");
+			String id = request.getParameter("id");
 			String pageNum = request.getParameter("pageNum");
 			MemberDAO md = MemberDAO.getInstance();
-			Member member = md.getUserInfo(memberid);
-			
-			request.setAttribute("id", id);
-			request.setAttribute("password", password);
-			request.setAttribute("memberid", memberid);
+			Member member = md.getUserInfo(id);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("member", member);
 		}catch(Exception e) {

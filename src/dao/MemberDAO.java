@@ -165,7 +165,7 @@ public class MemberDAO {
 
 	// 로그인(login.jsp -> LoginAction.java)
 	public int login(String id, String password) throws SQLException {
-		String sql = "select password from member where id=? and mem_del_yn='N'";
+		String sql = "select password from member where id=?";
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -387,7 +387,7 @@ public class MemberDAO {
 		// 회원 탈퇴 (service.
 		public int deleteUser(String id, String password) throws SQLException {
 			String sql1 = "select password from member where id=? and mem_del_yn='N'";
-			String sql2 = "update member set mem_del_yn='Y' where id=? and password=?";
+			String sql2 = "update member set mem_del_yn='N' where id=? and password=?";
 			Connection conn = getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -585,7 +585,6 @@ public class MemberDAO {
 		return result;
 	}
 	
-//	id로 회원 타입을 가져옴 ( 1=일반, 2=카페관리자, 3=전체관리자)
 	public int getAdmin(String id) throws SQLException {
 		
 		Connection conn = null;
@@ -614,32 +613,4 @@ public class MemberDAO {
 		return admin;
 	}
 	
-//	id와 대조하여 비밀번호 가져옴.
-	public String getpassword(String id) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String password = null;
-		String sql = "select password from member where id = ?";
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if (rs.next())
-				password = rs.getString(1);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		}
-		return password;
-	}
-	
-		
 }

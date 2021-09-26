@@ -147,16 +147,9 @@
 	    }
 	}
 	.modal-dialog {
-	    display: inline-block;
-	    text-align: left;
-	    vertical-align: middle;
-	}
-	.modal-header{
-		background-color: #1ca2e3;	
-	}
-	.modal-header a {
-		color: white;
-		font-weight: bold;
+	        display: inline-block;
+	        text-align: left;
+	        vertical-align: middle;
 	}
 	</style>
 	<script type="text/javascript">

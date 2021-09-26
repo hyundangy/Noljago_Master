@@ -30,21 +30,17 @@ public class AmReservationAddFormAction implements CommandProcess {
 
 		try {
 			String id = request.getParameter("id");
-			String password = md.getpassword(id); 
 			String pageNum = request.getParameter("pageNum");
 			int admin = md.getAdmin(id);
 			if (admin == 2) {
 				int cnum = cd.getCnum(id);
 				request.setAttribute("cnum", cnum);
-				int price = cd.getprice(cnum);
-				request.setAttribute("price", price);
 			}
 			String resno = randomString(10);
 			
 			request.setAttribute("resno", resno);
 			request.setAttribute("admin", admin);
 			request.setAttribute("id", id);
-			request.setAttribute("password", password);
 			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

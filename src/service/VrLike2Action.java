@@ -15,12 +15,10 @@ public class VrLike2Action implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		try{
 			String id = request.getParameter("id");
 			int cnum=Integer.parseInt(request.getParameter("cnum"));
 			int tnum=Integer.parseInt(request.getParameter("tnum"));
-		try{
-			
 			MemberDAO md= MemberDAO.getInstance();
 			int logincheck = md.logincheck(id);
 			if(logincheck == 1) {

@@ -17,10 +17,16 @@ public class AmReservationAddProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("-------------------------------------------------------------------------------");
+		System.out.println("AmReservationAddProAction start-->");
+		System.out.println("-------------------------------------------------------------------------------");
  
 		ReservationDAO rd = ReservationDAO.getInstance();
+		System.out.println("AmReservationAddProAction ReservationDAO-->");
 		CafeDAO cd = CafeDAO.getInstance();
+		System.out.println("AmReservationAddProAction CafeDAO-->");
 		MemberDAO md = MemberDAO.getInstance();
+		System.out.println("AmReservationAddProAction MemberDAO-->");
 		
 		try {
 			request.setCharacterEncoding("utf-8");
@@ -28,7 +34,6 @@ public class AmReservationAddProAction implements CommandProcess {
 			Reservation reserv = new Reservation();
 			String id = request.getParameter("id");
 			String resno = request.getParameter("resno");
-			
 			System.out.println("-------------------------------------------------------------------------------");
 			System.out.println("AmReservationAddProAction reserv-->" + reserv);
 			System.out.println("AmReservationAddProAction pageNum-->" + pageNum);
@@ -42,31 +47,26 @@ public class AmReservationAddProAction implements CommandProcess {
 				reserv.setStarttime(Integer.parseInt(request.getParameter("starttime")));
 				reserv.setId(request.getParameter("reservid"));
 				reserv.setEndtime(Integer.parseInt(request.getParameter("endtime")));
-				reserv.setPnum(0);
+				reserv.setPnum(Integer.parseInt(request.getParameter("pnum")));
 				reserv.setCnum(Integer.parseInt(request.getParameter("cnum")));
 				reserv.setTnum(Integer.parseInt(request.getParameter("tnum")));
 				reserv.setResno(resno);
 				reserv.setCount(Integer.parseInt(request.getParameter("count")));
-				int cnum = reserv.getCnum();
-				int point = cd.getprice(cnum);
-				reserv.setPoint(point);
-				md.updateMemberPoint(-reserv.getPoint(), reserv.getId());
+				reserv.setPoint(Integer.parseInt(request.getParameter("point")));
 			}
 			
 			if (admin == 2) {
-				int cnum = cd.getCnum(id);	
-				int price = cd.getprice(cnum);
+				int cnum = cd.getCnum(id);
 				reserv.setResdate(request.getParameter("resdate"));
 				reserv.setStarttime(Integer.parseInt(request.getParameter("starttime")));
 				reserv.setId(request.getParameter("reservid"));
 				reserv.setEndtime(Integer.parseInt(request.getParameter("endtime")));
-				reserv.setPnum(0);
+				reserv.setPnum(Integer.parseInt(request.getParameter("pnum")));
 				reserv.setCnum(cnum);
 				reserv.setTnum(Integer.parseInt(request.getParameter("tnum")));
 				reserv.setResno(resno);
 				reserv.setCount(Integer.parseInt(request.getParameter("count")));
-				reserv.setPoint(price);
-				md.updateMemberPoint(-price, reserv.getId());
+				reserv.setPoint(Integer.parseInt(request.getParameter("point")));
 			}
 			int result = rd.reservation(reserv);
 			System.out.println("-------------------------------------------------------------------------------");

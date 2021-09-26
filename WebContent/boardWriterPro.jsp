@@ -11,7 +11,7 @@
 <c:if test="${result > 0 }">
 	<script type="text/javascript">
 		alert("입력 완료");
-		location.href="boardList.do?pageNum=${pageNum}&id=${member.id}";
+		location.href="boardList.do?pageNum=${pageNum}";
 	</script>
 </c:if>
 <c:if test="${result == 0 }">

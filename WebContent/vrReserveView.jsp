@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="css/noljaBooster.css">
 	<title>심심할땐? 놀자GO! : 예 약</title>
 <style type="text/css">
+	
 	ul {
     list-style:none;
     margin:0;
@@ -129,21 +130,17 @@
 	   color: #ffffff;
 	   }
 	   
-/* 	   	#t {
-			text-align: center;
-			float: center;
-			margin-left: 800px;
-		} */
+	   #t{
+		text-align: center;
+		float: center;
+		margin-left: 800px;
+		}
 		
 		#tableCenter{
 		text-align: center;
 		float: center;
 		}
-	.block {
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 65px;
-	}
+	
 </style>
 <!--  달력     -->
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -190,16 +187,16 @@
 	  		  altField  : '#Day',		// 평일 주말 가격을 나누기위한 요일
 	       	  altFormat : 'DD',
   			  showMonthAfterYear: true,
-	  		  showButtonPanel: true,
+	  		  showButtonPanel: true, 
 	  	      currentText: '오늘',
 	  	      closeText: '닫기',
 	  	      changeMonth: true, 
-	  	      dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-	          dayNamesMin: [ '일', '월', '화', '수', '목', '금', '토'],
+	          dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+	          dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 	          monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 	          monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	          minDate: 1
-  		  }).datepicker("setDate", '1');	//내일 날짜로 초기화
+	          minDate: 0
+  		  }).datepicker("setDate", new Date());	//오늘 날짜로 초기화
   	 });
  	 
  	function getDate() {	//선택한 날짜 받아와서 예약가능한지 처리
@@ -245,10 +242,10 @@
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container-fluid">
+
 	<div>
 		<ul>
-			<li id="top" style="background-color: #1ca2e3;">01. 날짜/시간 선택</li>
+			<li id="top" style="background-color: red;">01. 날짜/시간 선택</li>
 			<li id="top">02. 예약 정보 입력</li>
 			<li id="top">03. 예약 완료</li>
 		</ul>
@@ -261,67 +258,66 @@
 	<input type="hidden" name="tnum" value="${tnum }">
 	<input type="hidden" name="cnum" value="${cnum }">
 	<div id="tableCenter">
-		<div style="margin-left: 50px; margin-top: 50px">
-		예약날짜 : <input type="text" name="datepicker" id="datepicker"  onchange="getDate()" style="margin-right: 30px">
-		<input type="hidden" id="Day" name="day">
-		예약가능  <img src="images/r_e.PNG" width="30" height="30" style="margin-right: 20px">
-		예약불가 <img src="images/r_f.PNG" width="30" height="30" style="margin-right: 20px">
-		</div>
-		<br>
-		<br>
-		<h3 style="margin-left: 50px;">${theme.tname}</h3>
+	<div style="margin-left: 50px; margin-top: 150px">
+	예약날짜 : <input type="text" name="datepicker" id="datepicker"  onchange="getDate()" style="margin-right: 30px">
+	<input type="hidden" id="Day" name="day">
+	예약가능  <img src="images/timeFullBut.jpg" width="40" height="40" style="margin-right: 20px">
+	예약불가 <img src="images/timeEmptBut.jpg" width="40" height="40" style="margin-right: 20px">
+	</div><br><br>
+	
+	<h3 style="margin-left: 50px;">${theme.tname}</h3>
 	</div>
 	<hr>
-		<div class="table-responsive">
-			<table class="block" id="t">
-				<tr>
-					<td rowspan="5"><img alt="" src="images/${theme.timage }" width="300" height="300" style="margin-right: 50px; "></td>
-				</tr>
+	<table style="margin-top: 30px; margin-bottom: 60px; margin-left: 150px;" id="t">
+		<tr>
+			<td rowspan="5"><img alt="" src="images/${theme.timage }" width="220" height="220" style="margin-right: 50px; "></td>
+		</tr>
+		
+		<tr>
+			<c:forEach var="i" begin="${open }" end="${open+3 }">
+			
+				<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
 				
-				<tr>
-					<c:forEach var="i" begin="${open }" end="${open+3 }">
-					
+			</c:forEach> 
+		</tr>
+		<tr>
+			<c:forEach var="i" begin="${open+4 }" end="${open+7 }">
+				
 						<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
-						
-					</c:forEach> 
-				</tr>
-				<tr>
-					<c:forEach var="i" begin="${open+4 }" end="${open+7 }">
-						
-								<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
-						
-					</c:forEach>
-				</tr>
-				<tr>
-					<c:if test="${hours <= 12}">
-						<c:forEach var="i" begin="${open+8 }" end="${close-1 }">
-							
-									<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
-								
-						</c:forEach>
-					</c:if>
+				
+			</c:forEach>
+		</tr>
+		<tr>
+			<c:if test="${hours <= 12}">
+				<c:forEach var="i" begin="${open+8 }" end="${close }">
 					
-					<c:if test="${hours > 12}">
-						<c:forEach var="i" begin="${open+8 }" end="${open+11 }">
-							
-									<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
-								
-						</c:forEach>
-					</c:if>
-				</tr>
-				<tr>
-					<c:if test="${hours > 12}">
-						<c:forEach var="i" begin="${open+12 }" end="${close-1 }">
-							
-									<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
-								
-						</c:forEach>
-					</c:if>
-				</tr>
-			</table>
-		</div>
+							<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
+						
+				</c:forEach>
+			</c:if>
+			
+			<c:if test="${hours > 12}">
+				<c:forEach var="i" begin="${open+8 }" end="${open+11 }">
+					
+							<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
+						
+				</c:forEach>
+			</c:if>
+		</tr>
+			
+		<tr>
+			<c:if test="${hours > 12}">
+				<c:forEach var="i" begin="${open+12 }" end="${close }">
+					
+							<td><input type="submit" value="${i}:00" name="time" id="${i}" class='buttonY' style="margin-left: 5px;"></td>
+						
+				</c:forEach>
+			</c:if>
+		</tr>
+	
+	</table>
 	</form>
-</div>
+	
 </body>
 </html>
 <%@include file="footer.jsp" %>

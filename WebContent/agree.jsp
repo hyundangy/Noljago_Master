@@ -17,16 +17,7 @@
 		.form-agree {
 			margin: 0 auto;
 			padding: 30px;
-			padding-bottom: 50px;
 			width: 500px;
-		}
-		.form-agree h2 {
-			margin-top: 10px;
-			margin-bottom: 30px;
-		}
-		#agreeImg {
-			width: 80px;
-			height: 80px;
 		}
 	    .allCheckBox {
 	        margin: 15 0 5 180;
@@ -81,10 +72,7 @@
 <body>
 	<!--------------- A G R E E : F O R M ---------------->
 	<div class="container">
-		<form class="form-horizontal form-agree" name="f1" action="join.do" method="post">
-			<div class="row text-center">
-				<a><img src="images/agree.svg" id="agreeImg"></a>
-			</div>
+		<form class="form-horizontal form-agree" name	="f1" action="join.do" method="post">
 			<h2 class="form-agree-heading text-center">놀자GO! 이용약관</h2>
             <div class="allCheckBox">
     		    <label for="allCheck">

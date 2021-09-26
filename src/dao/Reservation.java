@@ -78,14 +78,7 @@ public class Reservation {
 	private String cname; // 카페이름
 	private String tname; // 테마이름
 	private String pid; //파티번호로 파티원들의 아이디를 가져옴
-	private String type; // 카페종류 가져옴
-	
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+		
 	public String getPid() {
 		return pid;
 	}

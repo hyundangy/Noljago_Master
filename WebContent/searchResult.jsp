@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +20,7 @@
     position: fixed;
     top: 55px;
     right: 0;
+    width: 40%;
     height: 100%;
     overflow: hidden;
 	}
@@ -31,7 +31,7 @@
 	
 	 .right-box {
 		width:800px;
-		height:95%;
+		height:800px;
 		position:relative;
 		overflow:hidden;
 	} 
@@ -39,149 +39,86 @@
 	footer {
 		clear:both;
 	}
-	
-	#infoTd {
-		width: 63.15%;
-		vertical-align: middle;
-		padding-top: 20px;
-	}
-	#table2 {
-		width: 90%;
-	}
-	#table2 td {
-		padding: 5px;
-		border: none;
-	}
-	#first-in {
-		padding-top: 20px !important;
-		font-size: 16px;
-		font-weight: bold;
-	}
-	#weekday {
-		font-weight: bold;
-		color: #1ca2e3;
-	}
-	#weekend {
-		font-weight: bold;
-		color: #dc281e;
-	}
-	#category {
-		font-weight: bold;
-	}
-	#nosearch {
-		margin-top: 25%;
-	}
-	.btn-line {
-		margin-top: 30px;
-	}
-	#back {
-		color: white;
-		width: 150px;
-		height: 50px;
-		font-size: 20px;
-		border: none;
-		background-color: #005aa7;
-	}
-	#searchButton {
-		border: 1px solid #005aa7;
-		color: white;
-		background-color: #005aa7;
-	}
-	.search-title {
-		margin-top: 15px;
-		margin-left: 20px;
-		margin-bottom: 30px;
-		width: 60%;
-	}
+
 	</style>
 	
 </head>
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container">
+<div class="container-fluid">
+
 	<!-- 본문  -->
 	<c:if test="${fn:length(cslist) == 0}">
-		<center id="nosearch">
-			<h1> "${keyword}" </h1>
-			<h1>검색 결과가 없습니다. 다시 한번 검색해주세요.</h1>
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
-						<form name = "search_engine" action="search.do" method="get" onsubmit="return keyword_check()">
-						<div class="input-group">
-							<input  name="keyword" class="form-control input-lg" type="search" 
-							placeholder="주소, 가게명으로 검색: 예)마포 브이알존"/> 
-							<span class="input-group-btn">
-								<button class="btn btn-default btn-lg" type="submit" id="searchButton">GO!</button>
-							</span>
-						</div>
-						</form>
+	<center>
+		<h1> "${keyword}" </h1>
+		<h1>검색 결과가 없습니다. 다시 한번 검색해주세요.</h1>
+		<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<form name = "search_engine" action="search.do" method="get" onsubmit="return keyword_check()">
+					<div class="input-group">
+						<input  name="keyword" class="form-control input-lg" type="search" 
+						placeholder="주소, 가게명으로 검색: 예)강남 이스케이프"/> 
+						<span class="input-group-btn">
+							<button class="btn btn-default btn-lg" type="submit">Go!</button>
+						</span>
 					</div>
+					</form>
 				</div>
-				<div class="btn-line">
-					<button type="button" class="btn btn-default btn-lg" id="back" onclick="history.back();">돌아가기</button>
-				</div>
-		</center>
+			</div>
+	</center>
 	</c:if>
-	
+
 	<c:if test="${fn:length(cslist) != 0}">
-	
     <div class = "left-box">
-    	<div class="search-title">
-			<form name = "search_engine" action="search.do" method="get" onsubmit="return keyword_check()">
-				<div class="input-group">
-				<input  name="keyword" class="form-control input-lg" id="searchbar" type="search" placeholder="주소, 가게명으로 검색: 예)마포 브이알존"/> 
-				<span class="input-group-btn">
-					<button class="btn btn-default btn-lg" type="submit" id="searchButton">GO!</button>
-				</span>
-				</div>
-			</form>
-		</div>
-    <table class="table">
+    <table>
     <c:forEach var = "cafe" items="${cslist }">
-   	<tr id="fullRow">
-		<th id="mainImg" style="width: 20%;">
+   	<tr>
+		<th>
 			<p id="g1">
 			<c:if test="${cafe.type == 'vr'}">
 				<a href="vrList1View.do?cnum=${cafe.cnum }&id=${id}">
-				<img src="images/${cafe.image1 }" alt="vr 가게" width="250" height="250" style="vertical-align:text-top">
+				<img src="images/${cafe.image1 }" alt="vr 가게" width="250" height="200" style="vertical-align:text-top">
 				</a>
 			</c:if>
 			
 			<c:if test="${cafe.type == 'room'}">
 				<a href="roomList.do?cnum=${cafe.cnum }&id=${id}">
-				<img src="images/${cafe.image1 }" alt="room 가게" width="250" height="250" style="vertical-align:text-top">
+				<img src="images/${cafe.image1 }" alt="room 가게" width="250" height="200" style="vertical-align:text-top">
 				</a>
 			</c:if>
+			
+			
 			</p>
 		</th>
-		<td id="infoTd">
-			<table class="table" id="table2">
+		<td>
+			<table id="table2">
 				<tr>
-					<td><span id="category">카페종류 :</span> ${cafe.type }</td>
+					<td>${cafe.type }</td>
 				</tr>
 				<tr>
-					<td><span id="category">카페이름 :</span> ${cafe.cname }</td>
+					<td>${cafe.cname }</td>
 				</tr>
-				<!-- <tr>
-					<td><span id="category">카페평점 :</span>  
+				<tr>
+					<td>
 					<img src="images/f_star.png" alt="평점" width="20" height="20">
 					<img src="images/f_star.png" alt="평점" width="20" height="20">
 					<img src="images/f_star.png" alt="평점" width="20" height="20">
 					<img src="images/f_star.png" alt="평점" width="20" height="20">
+					후기: 200개
 					</td>
-				</tr> -->
-				<tr>
-					<td><span id="category">이용시간 :</span> ${cafe.open}:00 ~ ${cafe.close }:00</td>
 				</tr>
 				<tr>
-					<td id="first-in">[1인 기준]</td>
+					<td>이용시간 - ${cafe.open}:00 ~ ${cafe.close }:00</td>
 				</tr>
 				<tr>
-					<td><span id="weekday">평일</span> - <fmt:formatNumber value="${cafe.price }" pattern="#,###"></fmt:formatNumber>원</td>
+					<td>[1인 기준]</td>
 				</tr>
 				<tr>
-					<td><span id="weekend">주말</span> - <fmt:formatNumber value="${cafe.redprice }" pattern="#,###"></fmt:formatNumber>원</td>
+					<td>평일 - ${cafe.price }원</td>
+				</tr>
+				<tr>
+					<td>주말 - ${cafe.redprice }원</td>
 				</tr>
 			</table>
 		</td>

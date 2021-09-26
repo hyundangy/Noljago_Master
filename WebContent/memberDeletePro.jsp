@@ -13,7 +13,7 @@
 <c:if test="${result == 0 }">
 	<script type="text/javascript">
 		alert("DB오류발생! 회원삭제 실패");
-		location.href="memberContent.do?memberid=${memberid}&pageNum=${pageNum}";
+		location.href="memberContent.do?id=${id}&pageNum=${pageNum}";
 	</script>
 </c:if>	
 </body>

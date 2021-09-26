@@ -17,9 +17,6 @@
 		padding: 10px;
 		font-size: 18px;
 	}
-	th{
-		color: gray;
-	}
 
 	#reserveList {
 		    list-style:none;
@@ -87,11 +84,9 @@
 	   background-image: -ms-linear-gradient(top, #d90f74 0%, #d90f74 100%);
 	   color: #fff;
 	   }
-	#mainButton {
-		border: none;
-		color: white;
-		background-color: #1ca2e3;
-	}
+
+
+
 	</style>
 </head>
 <%@include file="menu.jsp" %>
@@ -105,7 +100,7 @@
 			<ul id="reserveList">
 				<li id="reserveList2">01. 날짜/시간 선택</li>
 				<li id="reserveList2">02. 예약 정보 입력</li>
-				<li id="reserveList2" style="background-color: #1ca2e3;">03. 예약 완료</li>
+				<li id="reserveList2" style="background-color: red;">03. 예약 완료</li>
 			</ul>
 		</div>
 	</div><p>
@@ -125,7 +120,6 @@
 
 	<c:if test="${result > 0 }">
 		<div align="center" style="margin-left: 50px; margin-top: 150px">
-			<img alt="" src="images/check.PNG" width="80px;" height="80px;">
 			<h2 style="margin-bottom: 40px;">${member.name } 님의 예약이 확인되었습니다.</h2>
 			<p>
 			<table style="margin-bottom: 30px; ">
@@ -154,7 +148,7 @@
 		</div><p>
 		<p style="text-align: center;">※ 자세한 내역은 My Page 에서 확인할 수 있습니다.</p>
 		<div align="center" style="margin-top:50px; margin-bottom: 100px;">
-			<a href='main.do?id=${id}' class="btn btn-default btn-lg" id="mainButton" role="button">메인화면</a>
+			<a href='main.do?id=${id}' class='button' style="text-decoration: none;">메인화면</a>
 		</div>
 	</c:if>
 	

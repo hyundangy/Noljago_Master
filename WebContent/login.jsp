@@ -22,15 +22,6 @@
 		padding: 30px;
 		width: 350px;
 	}
-	#logImg {
-		margin-right: 10px;
-		width: 80px;
-		height: 80px;
-	}
-	form h2 {
-		margin-top: 10px;
-		margin-bottom: 30px;
-	}
 	form input {
 		margin: 15px 0;
 	}
@@ -87,33 +78,33 @@
 		color: red;
 		margin-bottom: 15px;
 	}
-	/* 아이디 비밀번호 찾기 팝업창 */
-	/* input 넓이 설정 */
-	.modal .input-lg {
-	width: 300px;
-	/* border-radius: 0; */
-	font-size: 13px;
-	}
-	.modal #findname {
-		margin-top: 5px;
-	}
-	.modal #findid {
-	   	margin-top: 5px;
-	}
-	.modal #findSubmit {
-	   	color: white;
-		background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-	}
-	.modal #mbCont {
-		margin: 30px auto;
-	}
-	.modal .id-notice {
-		color: red;
-		font-size: 10px;
-	}
-	.modal-footer a {
-		color: black;
-	}
+	 /* 아이디 비밀번호 찾기 팝업창 */
+	    /* input 넓이 설정 */
+	    .modal .input-lg {
+	    	width: 300px;
+	    	/* border-radius: 0; */
+	    	font-size: 13px;
+	    }
+	    .modal #findname {
+	    	margin-top: 5px;
+	    }
+	    .modal #findid {
+	    	margin-top: 5px;
+	    }
+	    .modal #findSubmit {
+	    	color: white;
+	    	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+	    }
+	    .modal #mbCont {
+	    	margin: 30px auto;
+	    }
+	    .modal .id-notice {
+	    	color: red;
+	    	font-size: 10px;
+	    }
+	    .modal-footer a {
+	    	color: black;
+	    }
 	</style>
 <script type="text/javascript">
 	/* 아이디저장 스크립트 */
@@ -200,11 +191,10 @@
 	</c:if>
 	<!--------------- L O G I N : F O R M ---------------->
 	<div class="container">
-		<form class="form-horizontal form-login" action="loginAction.do" method="post">
-			<div class="log-box text-center">
-				<a><img src="images/login.svg" id=logImg></a>
-			</div>
+		<form class="form-horizontal form-login" action="loginAction.do"
+			method="post">
 			<h2 class="form-login-heading text-center">들어와! 놀자GO!</h2>
+			<br>
 			<label class="sr-only" for="id">아이디</label>
 			<input type="text" class="form-control center-block input-lg" name="id"
 				id="id" placeholder="아이디를 입력하세요" required autofocus> <label

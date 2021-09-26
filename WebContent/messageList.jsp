@@ -58,7 +58,7 @@
 	.nav-tabs > li.active > a:hover,
 	.nav-tabs > li.active > a:focus {
 		color: white;
-		background-color: #1ca2e3;
+		background-color: #005aa7;
 	}
 	/* 받은 편지함 테이블 */
 	.msg-table {
@@ -89,17 +89,11 @@
 	.rcvModal-table td {
 		background-color: #f4fbfb;
 	}
-	#reply {
+	#reply, #msgDel {
 		border: none;
 		font-size: 13px;
 		color: white;
 		background-color: #005aa7;
-	}
-	#msgDel {
-		border: none;
-		font-size: 13px;
-		color: white;
-		background-color: #dc281e;
 	}
 	/* 보낸 쪽지함 상세내역  */
 	.sndModal-table table {
@@ -134,30 +128,13 @@
 	#writeButton {
 		margin-left: 60px;
 	}
-	#writeButton {
+	#writeButton,
+	#writeCancle,
+	#rcvlist {
 		border: none;
 		font-size: 13px;
 		background-color: #005aa7;
 		color: white;
-	}
-	#writeCancle {
-		border: none;
-		font-size: 13px;
-		background-color: #dc281e;
-		color: white;
-	}
-	#rcvlist {
-		border: none;
-		font-size: 13px;
-		background-color: #1ca2e3;
-		color: white;
-	}
-	.modal-header{
-		background-color: #1ca2e3;	
-	}
-	.modal-header a {
-		color: white;
-		font-weight: bold;
 	}
 </style>
 <script type="text/javascript">

@@ -14,23 +14,15 @@ public class RoomWriteProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String id=request.getParameter("id");
-		int rate = Integer.parseInt(request.getParameter("rate"));
-		int cnum=Integer.parseInt(request.getParameter("cnum"));
-		
+
 		try{
-		
+			int rate=Integer.parseInt(request.getParameter("rate"));
 			ReviewDAO rd = ReviewDAO.getInstance();
 			Review review = new Review();
-			review.setId(id);
-			review.setRate(rate);
 			review.setRecontent(request.getParameter("recontent"));
-			
-			int result = rd.review_insert(review,id,cnum);
-			request.setAttribute("result", result);
-			request.setAttribute("id",id);
-			request.setAttribute("cnum", cnum);
+			review.setRate(rate);
+			//int result = rd.review_insert(review);
+			//request.setAttribute("result", result);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

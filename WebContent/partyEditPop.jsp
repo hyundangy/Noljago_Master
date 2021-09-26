@@ -16,10 +16,7 @@
 		<label>인원수 조정</label>
 		<input type="hidden" value="<%=pnum%>" name="pnum">
 		<input type="hidden" value="<%=pageNum%>" name="pageNum">
-		<h6>인원 수는 현재 파티원 수보다 작게 할 수 없습니다.</h6>
 		<select name="max">
-			<option value=2 >2명</option>
-			<option value=3 >3명</option>
 			<option value=4 >4명</option>
 			<option value=5 >5명</option>
 			<option value=6 >6명</option>

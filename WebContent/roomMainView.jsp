@@ -13,51 +13,39 @@
 	<title>심심할땐? 놀자GO! : 방탈출</title>
 	<style type="text/css">
 	
+	#top {font-size: 1.5em; margin-left: 20px;}
 	#g1 { margin-left: 50px; margin-top: 10px;}
 	
+	</style>
+<style type="text/css">
 	#review { color:#b1b1b1;}
 	#open { color:black;}
 	#c1 {margin-left: 15px;}
 	a {display:block;}
 	td{ line-height:220%; padding-right: 20px; }
 	#t2{margin-left: 25px;}
-	#top2 {
-		margin-top: 50px;
-		margin-bottom: 50px;
-	}
-	#tables{ 
-		float: left; 
-		display: inline; 
-		width: 30%; 
-		margin-left: 300px;
-	}
-	#vr-title {
-		font-size: 50px;
-		margin-top: 15px;
-		margin-bottom: 30px;
-		font-weight: bolder;
-		letter-spacing: 5px;
-		font-family: 'Do Hyeon', sans-serif;
-		opacity: 0.8;
-	}
+	#tables{ float: left; display: inline; width: 35%; margin-left: 150px;}
+	
 </style>
 </head>
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container-fluid">
-	<div class="row" style="background-image: linear-gradient(to bottom, #dfe9f3 0%, white 100%);">
-		<div id="top2" class="text-center">
-			<h1  id="vr-title">ROOM ESCAPE</h1>
+	<!-- <img src="images/r_listTop.JPG" style="margin: auto;">
+	 -->
+	 
+	 
+	 
+		<div id="top" align="center">
+			<h1><b>Room Escape</b></h1>
 		</div>
-	</div>
 		<hr>
 			
 				<c:forEach var="cafe" items="${list }">
 					<table id="tables" >
 						<tr >
 							<td rowspan="7" style="padding-bottom: 8px;">
-								<a href="roomList.do?id=${id}&cnum=${cafe.cnum }"><img src="images/${cafe.image1 }" alt="room 가게" width="270" height="250" style="vertical-align:text-top"></a>
+								<a href="roomList.do?id=${id}&cnum=${cafe.cnum }"><img src="images/${cafe.image1 }" alt="room 가게" width="230" height="220" style="vertical-align:text-top"></a>
 							</td>
 						</tr>
 						<tr>
@@ -132,8 +120,9 @@
 						<tr><td> </td></tr>
 					</table>
 				</c:forEach>
-
-</div>	
+	
+	
+	
 </body>
 </html>
-<%@include file="footer.jsp" %>
+<%-- <%@include file="footer.jsp" %> --%> 

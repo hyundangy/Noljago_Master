@@ -36,95 +36,30 @@ figure.snip1132.hover img {
 }
 #name{font-size: 30px;}
 #t1{
+	margin-left: 370px;
 	margin-top: 60px;
-	margin-left: 500px;
 }
 #t2{
-	margin-left: 40px;
+	margin-left: 20px;
 	margin-top: 100px;
 	font-size: 1.5em;
 }
 #t2 td{height: 35px;}
-	/* 예약 버튼  */
-	.button {
-	   border: 0px solid #000000;
-	   background: #db2c69;
-	   background: -webkit-gradient(linear, left top, left bottom, from(#db2c69), to(#db2c69));
-	   background: -webkit-linear-gradient(top, #db2c69, #db2c69);
-	   background: -moz-linear-gradient(top, #db2c69, #db2c69);
-	   background: -ms-linear-gradient(top, #db2c69, #db2c69);
-	   background: -o-linear-gradient(top, #db2c69, #db2c69);
-	   background-image: -ms-linear-gradient(top, #db2c69 0%, #db2c69 100%);
-	   padding: 18px 36px;
-	   -webkit-border-radius: 9px;
-	   -moz-border-radius: 9px;
-	   border-radius: 9px;
-	   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-	   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-	   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-	   text-shadow: #ffffff 0 1px 0;
-	   color: #ffffff;
-	   font-size: 22px;
-	   font-family: helvetica, serif;
-	   text-decoration: none;
-	   vertical-align: middle;
-	   }
-	.button:hover {
-	   border: 0px solid #0a3c59;
-	   text-shadow: #ffffff 0 1px 0;
-	   background: #fc9abc;
-	   background: -webkit-gradient(linear, left top, left bottom, from(#fc9abc), to(#fc9abc));
-	   background: -webkit-linear-gradient(top, #fc9abc, #fc9abc);
-	   background: -moz-linear-gradient(top, #fc9abc, #fc9abc);
-	   background: -ms-linear-gradient(top, #fc9abc, #fc9abc);
-	   background: -o-linear-gradient(top, #fc9abc, #fc9abc);
-	   background-image: -ms-linear-gradient(top, #fc9abc 0%, #fc9abc 100%);
-	   color: #ededed;
-	   }
-	.button:active {
-	   text-shadow: #1e4158 0 1px 0;
-	   border: 0px solid #db2c69;
-	   background: #ffffff;
-	   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#fc9abc));
-	   background: -webkit-linear-gradient(top, #ffffff, #ffffff);
-	   background: -moz-linear-gradient(top, #ffffff, #ffffff);
-	   background: -ms-linear-gradient(top, #ffffff, #ffffff);
-	   background: -o-linear-gradient(top, #ffffff, #ffffff);
-	   background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%);
-	   color: #db2c69;
-	}
-	.table-responsive {
-		margin-bottom: 65px;
-	}
-	
-	.res-box {
-		margin-top: 50px;
-		width: 50%;
-	}   
-	#resButton {
-		border: none;
-		color: white;
-		font-weight: bold;
-		background-color: #db2c69;
-	}
-	#like_cnt {
-		margin-bottom: 0;
-	}
 </style>
 
 <script type="text/javascript">
 function like() {
 		$.post('vrLike.do?id=${id}&cnum=${cnum}&tnum=${tnum}', function(msg){
-			var num = msg.trim();	//공백을 없애고 보냄
+			var num = msg.trim();
 			var numArr = num.split('-');
-			var likeCnt = numArr[0];	//좋아요 개수
-			var result = numArr[1];		 //좋아요 누르면 1
+			var likeCnt = numArr[0];
+			var result = numArr[1];
 			if(result == "1") {
-				$("#like_cnt").text("좋아요 : "+likeCnt+"개");
+				$("#like_cnt").text(likeCnt+"개");
 				$("#img1").attr("src", "images/like2.png");
 			}else if(result=="0"){
 				$.post('vrLike2.do?id=${id}&cnum=${cnum}&tnum=${tnum}', function(msg){
-					$("#like_cnt").text("좋아요 : "+likeCnt+"개");
+					$("#like_cnt").text(likeCnt+"개");
 					$("#img1").attr("src", "images/like.png");
 					location.reload();
 				});
@@ -144,193 +79,207 @@ $(".hover").mouseleave(
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container-fluid">
-	<div class="table-responsive">
 	<table>
 		<tr>
 			<td>
+
 				<table id="t1">
 					<tr id="name">
-						<td><span style="margin-bottom: 30px;">${theme.tname }</span>
-						<span style="color: #707070; font-size: 20px; margin-bottom: 30px;">- ${cafe.cname }</span>
+						<td>${theme.tname }
+						<span style="color: #707070; font-size: 20px;">- ${cafe.cname }</span>
 						</td>
 					</tr>
+
 					<tr>
 						<td>
+						<figure class="snip1132">
 						<img src="images/${theme.timage }" class="effect"
-							width="600px" height="400px" style="margin-top: 30px;" >
+							width="500px" height="300px">
+						</figure>
 						<p></td>
+
 					</tr>
+
+
 				</table>
 			</td>
 			<td>
 				<table id="t2">
 					<tr>
-						<td id="content"><span style="color:gray;">장르: </span>액션 FPS</td>
+						<td id="content">장르: 액션 FPS</td>
 					</tr>
 					<tr>
-						<td id="content"><span style="font-size: 18px;">${theme.tcontent }</span></td>
+						<td id="content">${theme.tcontent }</td>
 					</tr>
+
 					<tr>
-						<td id="content"><span style="color:gray; font-size: 18px;">최대 인원: </span>${theme.headcount }</td>
+						<td id="content">최대 인원: ${theme.headcount }</td>
 					</tr>
+
 					<tr>
-						<td id="content"><span style="color:gray; font-size: 18px;">난이도:</span> <c:choose>
+						<td id="content">VR 체험 난이도: <c:choose>
 								<c:when test="${theme.score1 eq 1 }">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 2}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 3}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 
 								</c:when>
 								<c:when test="${theme.score1 eq 4}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 5}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
 								</c:when>
 							</c:choose>
 						</td>
 					</tr>
+
 					<tr>
-						<td id="content"><span style="color:gray; font-size: 18px;">스릴감:</span> <c:choose>
+						<td id="content">스릴감: <c:choose>
 								<c:when test="${theme.score2 eq 1 }">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score2 eq 2}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score2 eq 3}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+
 								</c:when>
 								<c:when test="${theme.score2 eq 4}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score2 eq 5}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
 								</c:when>
 							</c:choose>
 						</td>
 					</tr>
+
+
 					<tr>
-						<td id="content"><span style="color:gray; font-size: 18px;">공포감:</span> <c:choose>
+						<td id="content">공포감: <c:choose>
 								<c:when test="${theme.score3 eq 1 }">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score3 eq 2}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score3 eq 3}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+
 								</c:when>
 								<c:when test="${theme.score3 eq 4}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score3 eq 5}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
 								</c:when>
 							</c:choose>
 						</td>
 					</tr>
+
 					<tr>
-						<td id="content"><span style="color:gray; font-size: 18px;">볼거리: </span><c:choose>
-							<c:when test="${theme.score4 eq 1 }">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+						<td id="content">볼거리: <c:choose>
+								<c:when test="${theme.score4 eq 1 }">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score4 eq 2}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score4 eq 3}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+
 								</c:when>
 								<c:when test="${theme.score4 eq 4}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score4 eq 5}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
 								</c:when>
 							</c:choose>
 						</td>
@@ -339,27 +288,19 @@ $(".hover").mouseleave(
 			</td>
 		</tr>
 	</table>
-
 	<%-- <a href="vrLike.do?id=${id }&&cnum=${theme.cnum }&&tnum=${theme.tnum }">
 		<img src="images/wish.JPG" id="img1" width="40" height="40" style="margin-left: 1200px;">
 	</a>  --%>
 	
-		<div class="res-box center-block text-center form-inline">
-			<div class="form-group text-center" style="margin-right: 30px;">
-				<c:if test="${good_y==1 }">	<!-- 들어간 테마가 좋아요 클릭한 상태이면 꽉찬 하트 -->
-					<a id="btn_like" onclick="like();"><img src="images/like2.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
-				</c:if>
-				<c:if test="${good_y==0 }">	<!-- 아니면 빈 하트 -->
-					<a id="btn_like" onclick="like();"><img src="images/like.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
-				</c:if>
-				<p id="like_cnt">좋아요 : ${num}개</p>
-			</div>
-			<div class="form-group text-center">
-				<a href="vrReserveView.do?id=${id }&&cnum=${theme.cnum }&&tnum=${theme.tnum}" class="btn btn-default btn-lg" id="resButton">RESERVE</a>
-			</div>
-		</div>
-	</div>
-</div>
+	<c:if test="${good_y==1 }">	<!-- 들어간 테마가 좋아요 클릭한 상태이면 -->
+		<a id="btn_like" style="margin-left: 1100px;" onclick="like();"><img src="images/like2.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
+	</c:if>
+	<c:if test="${good_y==0 }">	<!-- 아니면 -->
+		<a id="btn_like" style="margin-left: 1100px;" onclick="like();"><img src="images/like.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
+	</c:if>
+	
+	<a href="vrReserveView.do?id=${id }&&cnum=${theme.cnum }&&tnum=${theme.tnum}"><button id="reserve" style="margin-left: 20px;">예약하기</button></a>
+	<p id="like_cnt" style="margin-left: 1108px;">${num}개</p>
 </body>
 </html>
 <%@include file="footer.jsp" %>

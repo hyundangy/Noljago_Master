@@ -8,7 +8,7 @@
 <title>심심할땐? 놀자GO!</title>
 <script language="javascript">
 function moveClose() {
-  opener.location.href="PartySelect.do?pnum=${res.pnum}&id=${id}&pageNum=1";
+  opener.location.href="PartySelect.do?pnum=${res.pnum}&pageNum=1";
   self.close();
 }
 

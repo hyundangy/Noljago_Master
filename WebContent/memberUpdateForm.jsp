@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 ${admin }
 <form action="memberUpdatePro.do" method="post">
 	<input type="hidden" name="id" value="${member.id }">

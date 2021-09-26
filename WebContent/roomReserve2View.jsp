@@ -169,7 +169,7 @@
 		function partySubmit(){
 			if (document.getElementById("agreey").checked) {
 				var fName = document.formName;
-				window.open('','infoSelect','width=500px,height=500px');
+				window.open('','infoSelect','width=350px,height=350px');
 				fName.target = "infoSelect";
 				fName.action = "partyInfoSelectPop.jsp";
 				fName.submit();
@@ -242,15 +242,15 @@
 	<div style="margin: auto;">
 		<img src="images/${cafe.image2 }" class="img-responsive" alt="Responsive image" style="margin: auto;">
 
-		<div id="top" style="margin-top: 50px; margin-bottom: 30px;">
+		<div id="top" style="margin-top: 50px">
 			<ul id="reserveList">
 				<li id="reserveList2">01. 날짜/시간 선택</li>
-				<li id="reserveList2" style="background-color: #1ca2e3;">02. 예약 정보 입력</li>
+				<li id="reserveList2" style="background-color: red;">02. 예약 정보 입력</li>
 				<li id="reserveList2">03. 예약 완료</li>
 			</ul>
 		</div>
 	</div>
-	
+
 
 
 	<form action="" name = "formName" method="post" style="margin-bottom: 70px;">
@@ -263,8 +263,7 @@
 	<input type="hidden" name="mempoint" value="${member.point }">
 	<input type="hidden" name="perprice" value="${price}">
 
-	<div style="margin-top: 125px;">
-	<table class="type04" style="margin:auto; margin-top: 50px;">
+	<table class="type04" style="margin: auto;">
 		<tr>
 			<th scope="row">테마(Room)</th>
 			<td>${theme.tname }</td>
@@ -284,10 +283,10 @@
 		            <option value="2">2</option>
 		            <option value="3">3</option>
 		            <option value="4">4</option>
-		            <!-- <option value="5">5</option>
+		            <option value="5">5</option>
 		            <option value="6">6</option>
 		            <option value="7">7</option>
-		            <option value="8">8</option> -->
+		            <option value="8">8</option>
 	            </select> 명</td>
 		</tr>
 		<tr>
@@ -307,7 +306,6 @@
 			<td><input type="text" id="totprice" name="price" value="${price}" disabled="disabled" style="background-color: white; border-style:none; "></td>
 		</tr>
 	</table>
-	</div>
 	<p><p>
 	<div style="color: red; margin-top: 20px;" align="center">
 		※ 게임시작 1시간 전에 예약확인 전화를 드리는데, 통화가 되지 않을 경우 자동 예약취소가 되니 이점 양지하여 주시기 바랍니다.<br>

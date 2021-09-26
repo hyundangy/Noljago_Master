@@ -142,7 +142,7 @@ public class ReservationDAO {
 	// myresinfoaction, myrescancelaction
 	// 아이디, 예약번호로 예약내역 가져옴
 	public Reservation getResInfo(String id, String resno) throws SQLException {
-		String sql = "select reserv.*, cafe.cname, cafe.type, theme.tname "
+		String sql = "select reserv.*, cafe.cname, theme.tname "
 				+ "From reservation reserv, cafe cafe, theme theme "
 				+ "where reserv.id=? and reserv.resno = ? "
 				+ "and reserv.cnum = cafe.cnum and reserv.cnum = theme.cnum "
@@ -163,8 +163,6 @@ public class ReservationDAO {
 				reservation.setEndtime(rs.getInt("endtime"));
 				reservation.setPnum(rs.getInt("pnum"));
 				reservation.setCname(rs.getString("cname"));
-				reservation.setCnum(rs.getInt("cnum"));
-				reservation.setType(rs.getString("type"));
 				reservation.setTname(rs.getString("tname"));
 				reservation.setCount(rs.getInt("count"));
 				reservation.setPoint(rs.getInt("point"));
@@ -278,7 +276,7 @@ public class ReservationDAO {
 //	전체 예약 리스트
 	public List<Reservation> ResList() throws SQLException {
 		List<Reservation> reslist = new ArrayList<Reservation>();
-		String sql = "select * from reservation order by resdate";
+		String sql = "select * from reservation";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -323,7 +321,7 @@ public class ReservationDAO {
 		ResultSet rs = null;
 		String sql = "select reserv.* from reservation reserv, cafe, member mem "
 				+ "where reserv.cnum = cafe.cnum and cafe.id = mem.id "
-				+ "and mem.admin = 2 and mem.id = ? order by resdate";
+				+ "and mem.admin = 2 and mem.id = ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -445,6 +443,14 @@ public class ReservationDAO {
 		return result;
 	}
 	
+//	public int reservationAdd(Reservation res) throws SQLException {
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		int result = 0;
+//		ResultSet rs = null;
+//		String sql1 = "select nvl(max(resdate), 0) from reservation";
+//		String sql = "insert into reservation values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+//	}
 	
 	//예약을 했는지 확인하기 위한 메소드 ( 예약하면 후기 쓸 수 있음)
 	public int res_yn(String id, int cnum) throws SQLException{
@@ -584,5 +590,5 @@ public class ReservationDAO {
 		}
 		return result;
 	}
-	
+
 }

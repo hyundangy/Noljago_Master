@@ -16,7 +16,7 @@
 </c:if>
 <c:if test = "${result == 0 }">
 	<script type="text/javascript">
-		alert{"신규 예약 등록 실패"};
+		alert{"신규 카페 등록 실패"};
 		location.href = "amReservationAddForm.do?id=${id}&pageNum=${pageNum}";
 	</script>
 </c:if>

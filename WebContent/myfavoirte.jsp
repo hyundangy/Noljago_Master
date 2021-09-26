@@ -119,11 +119,11 @@
 		border: none;
 		font-size: 13px;
 		color: white;
-		background-color: #dc281e;
+		background-color: #005aa7;
 	}
 	table .favCancle:hover, table .favCancle:focus {
 		color: white;
-		background-color: #dc281e;
+		background-color: #005aa7;
 	}
 	#favRes {
 		border: none;
@@ -150,12 +150,12 @@
 						$("#cancleOk").slideDown(1500, function(){
 							$("#cancleOk").slideUp(1500);
 						});
-						setTimeout("location.reload()", 3000);
+						setTimeout("location.reload()", 2000);
 					} else {
 						$("#cancleX").slideDown(1500, function() {
 							$("#cancleX").slideUp(1500);
 						});
-						setTimeout("location.reload()", 3000);
+						setTimeout("location.reload()", 2000);
 					}
 				});
 			} else {

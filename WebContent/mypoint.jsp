@@ -128,7 +128,7 @@
 			</div>
 			<div class="banner-cont col-lg-6 col-lg-offset-3">
 				<div class="img-box text-center col-xs-6">
-					<img class="profileImg img-circle center-block" src="${member.image}" alt="profile">
+					<img class="profileImg img-responsive center-block" src="${member.image}" alt="profile">
 				</div>
 				<div class="info-box col-xs-6">
 					<div class="form-inline">

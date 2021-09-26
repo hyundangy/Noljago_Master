@@ -104,8 +104,7 @@
 									pnumarray.push(pnumjson[key]);
 								}
 								console.log(pnumarray[0]);
-								pnumarray.sort(function(a, b){return b - a});
-								console.log(pnumarray[0]);
+								pnumarray.sort().reverse();
 								
 								$("#pnumlist").val(pnumarray);
 								window.opener.name = "parentPage"; 		// 부모창의 이름 설정
@@ -164,14 +163,13 @@
 		<input type="hidden" value="<%=hopehour %>" name="hopehour">
 		<input type="hidden" value="<%=perprice %>" name="perprice">
 		<input type="hidden" id="pnumlist" name="pnumlist" >
-		<div style="margin-top: 50px; margin-left: 100px;">
-		<label><span style="font-size: 20px; color: gray;"> 파티장   :</span></label>
-		<span ><%=name %>님</span><br>
-		<label><span style="font-size: 20px; color: gray; line-height:40px; margin-top: 50px;">희망 날짜 :</span></label>
+		<label>파티장 이름</label>
+		<%=name %><br>
+		<label>희망 날짜</label>
 		<%=hopedate %><br>
-		<label><span style="font-size: 20px; color: gray;">희망 시간 :</span></label>
+		<label>희망 시간</label>
 		<%=hopehour %>시<br>
-		<label><span style="font-size: 20px; color: gray; line-height:40px;">파티 인원 :</span></label>
+		<label>파티인원수</label>
 		<select name="max">
 			<option value=4 >4명</option>
 			<option value=5 >5명</option>
@@ -179,13 +177,12 @@
 			<option value=7 >7명</option>
 			<option value=8 >8명</option>
 		</select><br>
-		<label><span style="font-size: 20px; color: gray;">차감 포인트 :</span></label>
-		<%=perprice %> P<br>
-		<label><span style="font-size: 20px; color: gray; line-height:40px;">추가 내용 :</span></label><br>
+		<label>차감되는 포인트</label>
+		<%=perprice %><br>
+		<label>추가 내용</label><br>
 		<textarea rows="5" cols="30" name="pcontent"></textarea><br>
-		<input type="button" value="파티 생성"  style="background-color:#005aa7; color:white; margin-left: 10px; padding: 8px; margin-top: 17px; font-size: 15px;" onclick="javascript:createPCheak();">
-		<input type="button" value="메인 화면으로" style="background-color:#005aa7; color:white; padding: 8px; font-size: 15px; margin-left: 5px;" onclick="goMain();">
-		</div>
+		<input type="button" value="파티 생성" onclick="javascript:createPCheak();">
+		<input type="button" value="메인 화면으로" onclick="goMain();">
 	</form>
 </body>
 </html>

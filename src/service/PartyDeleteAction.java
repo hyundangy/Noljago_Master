@@ -20,13 +20,14 @@ public class PartyDeleteAction implements CommandProcess {
 			String id = request.getParameter("id");
 			MemberDAO md = MemberDAO.getInstance();
 			Member member = md.getUserInfo(id);	//파티장의 정보가 담겨있음
-
+			
 			int pnum = Integer.parseInt(request.getParameter("pnum"));
-			String pageNum = request.getParameter("pageNum");			PartyDAO pd = PartyDAO.getInstance();
-			Party party = pd.partyInfo(pnum);	//돈을 받아오기 위한 메소드
+			String pageNum = request.getParameter("pageNum");
+			PartyDAO pd = PartyDAO.getInstance();
+			Party party = pd.partyinfo(pnum);
 			int point = party.getPrice();		//반환해줄 가격
 			int result1 = 0;		//포인트 업데이트 성공여부
-
+			
 			result1 = pd.pmemUpdatePoint(pnum, point);	//0이면 돈 돌려주다 문제 발생, 1이면 성공
 			if (result1 == 1) {
 				int result = pd.partyDelete(pnum);

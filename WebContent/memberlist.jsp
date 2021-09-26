@@ -8,31 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <style type="text/css">
 table {
 	width: 100%;
 }
-body { background-color: white; font-size: 10pt; }
-table { background-color: #005aa7; }
-table a {
-	font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #58FA82;
-    }
-th{ color: white;
-	text-align: center;
-	}
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 10px;}
 </style>
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 	<h2>회원 리스트</h2>
 	<table>
 		<tr>
-			<td style = "background-color:#D8D8D8"><a href="memberAddForm.do" style="text-decoration: none;">회원생성</a></td>
+			<td><a href="memberAddForm.do">회원생성</a></td>
 		</tr>
 	</table>
 	<table>
@@ -50,9 +37,9 @@ td { background-color: white; text-align: center; padding: 10px;}
 		<c:if test="${totCnt > 0 }">	<!-- 리스트 널 체크 -->
 			<c:forEach var="member" items="${list }">
 				<tr>
-					<td class=left width=200 style = "background-color:#D8D8D8">
-						<span style="text-align: center;"> <a href='memberContent.do?memberid=${member.id}&pageNum=${currentPage}' style="text-decoration: none; text-align: center;">
-							${member.id}</a></span>
+					<td class=left width=200>
+						 <a href='memberContent.do?id=${member.id}&pageNum=${currentPage}'>
+							${member.id}</a>
 					</td>
 					<td>${member.admin}</td>
 					<td>${member.name}</td>

@@ -20,10 +20,8 @@
         
         
         if (pnumlist.size() == 0) {
-        	System.out.println("추천할 리스트 0");
         	result = 0;	//추천할게 없어요
         } else {
-        	System.out.println("추천할 리스트 1");
         	result = 1;	//추천할게 있어요
         }
         

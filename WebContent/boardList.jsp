@@ -29,9 +29,6 @@ h3 {
 	margin-bottom: 65px;
 	width: 80%;
 }
-.list-box a:hover {
-	text-decoration: none;
-}
 .list-box th {
 	color: white;
 	background-color: #1ca2e3;
@@ -139,29 +136,6 @@ h3 {
 #msgToid {
 	margin-top: 0;
 }
-/* 모달 헤더 */
-.modal-header{
-	background-color: #1ca2e3;	
-}
-.snd-title {
-	color: white;
-	font-weight: bold;
-}
-.btnGroup {
-	margin-left: 50px;
-}
-#rcvlist {
-	border: none;
-	font-size: 13px;
-	color: white;
-	background-color: #1ca2e3;
-}
-#writeCancle {
-	border: none;
-	font-size: 13px;
-	color: white;
-	background-color: #dc281e;
-}
 </style>
 <script type="text/javascript">
 /* 메세지 보내기 */
@@ -225,7 +199,7 @@ function reply(index) {
 									<td><ul class="nav navbar-nav"><li class="dropdown"><a href="#" class="dropdown-toggle" id="idlist" data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><input type="hidden" id="reply${status.index}" value="${board.id}">${board.id}<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<!-- <li><a href="#">프로필보기</a></li> -->
+							<li><a href="#">프로필보기</a></li>
 							<c:if test="${id !=null && id != ''}">
 								<li><a href="#" data-target="#writeModal" data-toggle="modal" onclick="reply(${status.index});">쪽지보내기</a></li>
 							</c:if>
@@ -241,7 +215,7 @@ function reply(index) {
 						</c:if>
 						<c:if test="${totCtn == 0 }">
 							<tr>
-								<td class="text-center">작성된 게시글이 존재하지 않습니다.</td>
+								<td colspan="6" class="text-center">작성된 게시글이 존재하지 않습니다.</td>
 							</tr>
 						</c:if>
 					</tbody>
@@ -255,16 +229,16 @@ function reply(index) {
 						<ul class="pagination pagination-sm">
 						<c:if test="${startPage > blockSize}">
 						    <li>
-							    <a href='boardList.do?pageNum=${startPage-blockSize }&id=${member.id}' aria-label="Previous">
+							    <a href='boardList.do?pageNum=${startPage-blockSize }' aria-label="Previous">
 							    <span aria-hidden="true">&laquo;</span></a>
 						    </li>
 						</c:if>
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-						    <li><a href='boardList.do?pageNum=${i}&id=${member.id}'>${i}</a></li>
+						    <li><a href='boardList.do?pageNum=${i}'>${i}</a></li>
 						</c:forEach>
 						<c:if test="${endPage < pageCnt}">
 						    <li>
-						    	<a href='boardList.do?pageNum=${startPage+blockSize}&id=${member.id}' aria-label="Next">
+						    	<a href='boardList.do?pageNum=${startPage+blockSize}' aria-label="Next">
 						    	<span aria-hidden="true">&raquo;</span></a>
 						    </li>
 						</c:if>
@@ -281,24 +255,53 @@ function reply(index) {
 					</c:if>
 				</div>
 				<div class="form-group search-cont">
-					<form action="boardSearch.do" method="post">
-						<div class="input-group">
-							<span class="input-group-addon" id="search-back">
-								<select class="form-control input-sm" name="opt" id="opt">
+					<div class="input-group">
+						<span class="input-group-addon" id="search-back">
+							<select class="form-control input-sm" name="opt" id="opt">
+								<option value=1>작성자</option>
+								<option value=2>제목</option>
+								<option value=3>내용</option>
+								<option value=4>제목+내용</option>
+							</select>
+						</span>
+						<input type="text" class="form-control input-sm" placeholder="검색" name="condition" id="searchbar">
+						<span class="input-group-btn">
+					        <input type="submit" class="btn btn-default input-sm" id="submitButton" value="검 색">
+					    </span>
+					</div>
+				</div>
+			</div>
+			<%-- <div style="text-align: center">
+				<c:if test="${startPage > blockSize }">
+					<a href='boardList.do?pageNum=${startPage-blockSize }'>[이전]</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<a href='boardList.do?pageNum=${i }'>[${i }]</a>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt }">
+					<a href='boardList.do?pageNum=${startPage+blockSize }'>[다음]</a>
+				</c:if>
+			</div> --%>
+			
+			<!-- 게시글 검색 영역 -->
+			<!-- <div>
+				<form action="boardSearch.do" method="post">
+					<table style="float: right;">
+						<tr>
+							<td><select id="opt" name="opt"
+								class="selectpicker form-control" style="width: 120px;">
 									<option value=1>작성자</option>
 									<option value=2>제목</option>
 									<option value=3>내용</option>
 									<option value=4>제목+내용</option>
-								</select>
-							</span>
-							<input type="text" class="form-control input-sm" placeholder="검색" name="condition" id="searchbar">
-							<span class="input-group-btn">
-						        <input type="submit" class="btn btn-default input-sm" id="submitButton" value="검 색">
-						    </span>
-						</div>
-				    </form>
-				</div>
-			</div>
+							</select></td>
+							<td><input type="text" placeholder="검색" name="condition">
+								<input type="submit" class="btn btn-default" id="submitButton" value="검 색">
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div> -->
 		</div>
 	</div>
 <!-- 쪽지보내기 -->

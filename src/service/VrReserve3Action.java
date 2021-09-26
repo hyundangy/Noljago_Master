@@ -100,7 +100,6 @@ public class VrReserve3Action implements CommandProcess {
 				}
 			}
 			
-			member = md.getUserInfo(id);
 			request.setAttribute("member", member);			
 			request.setAttribute("tnum", tnum);
 			request.setAttribute("cnum", cnum);

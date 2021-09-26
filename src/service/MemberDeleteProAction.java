@@ -14,13 +14,12 @@ public class MemberDeleteProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String memberid = request.getParameter("memberid");
-			System.out.println(memberid);
+			String id = request.getParameter("id");
 			String pageNum = request.getParameter("pageNum");
 			MemberDAO md = MemberDAO.getInstance();
-			int result = md.memberDelete(memberid);
+			int result = md.memberDelete(id);
 			request.setAttribute("result", result);
-			request.setAttribute("memberid", memberid);
+			request.setAttribute("id", id);
 			request.setAttribute("pageNum", pageNum);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

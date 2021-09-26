@@ -5,22 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신규 카페 등록</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <style type="text/css">
 
 form .sex-group {
 			margin: 15px;
 			text-align: center;
 		}
-body { background-color: white; font-size: 10pt; }
-table { background-color: #005aa7; margin-left: 600px;}
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 10px;}
-.left { text-align: left; }
+
 </style>
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 <form action = "amCafeAddPro.do?pageNum=${pageNum}" method = "post">
 <table>
 	<caption><h2>신규 카페 등록</h2></caption>
@@ -35,8 +30,8 @@ td { background-color: white; text-align: center; padding: 10px;}
 	<tr><td>방 개수</td><td><input type = "number" name = "roomcount" required></td></tr>
 	<tr><td>카페 웹사이트</td><td><input type = "text" name = "curl" required></td></tr>
 	<tr>
-		<td><input type = "reset" value = "다시 작성" style="color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0;"></td>
-		<td><input type = "submit" value = "확인" style="color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0;"></td>
+		<td><input type = "reset" value = "다시 작성"></td>
+		<td><input type = "submit" value = "확인"></td>
 	</tr>
 </table>
 </form>

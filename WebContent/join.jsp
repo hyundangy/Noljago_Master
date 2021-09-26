@@ -15,14 +15,7 @@
 		form {
 			display: block;
 		}
-		#joinImg {
-			width: 80px;
-			height: 80px;
-		}
-		form h2 {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
+
 		.form-join {
 			margin: 0 auto;
 			padding: 30px;
@@ -180,11 +173,11 @@
 		function checkPwd() {
 		var password = $('#password').val();
 		var password2 = $('#password2').val();
-		if(password2 == "" || password2 != password) {
+		if(password2 == "" & (password2 != password || password2 == password)) {
 			$("#password2").css("background-color", "#FFCECE");
-			$("#pwdOk").hide();
-			$("#pwdFalse").show();
+			$("pwdFalse").show();
 			$("#pwdFalse").html("비밀번호를 확인해주세요.")
+			$("#pwdOk").hide();
 		} else if(password == password2) {
 			$("#password2").css("background-color", "#FFFFFF");
 			$("#pwdFalse").hide();
@@ -272,18 +265,15 @@
 	<!--------------- J O I N : F O R M ---------------->
 	<div class="container">
 		<form class="form-horizontal form-join" name="form" id="form" action="joinAction.do" enctype="multipart/form-data" method="post">
-			<div class="join-box text-center">
-				<a><img src="images/id.svg" id="joinImg"></a>
-			</div>
 			<h2 class="form-login-heading text-center">Let's 놀자GO!</h2>
 			<br>
 			<label class="sr-only" for="id">아이디</label>
 			<input type="text" class="form-control center-block input-lg center-block" name="id" id="id" placeholder="아이디를 입력해주세요.(4~20자)" pattern="[A-Za-z0-9]{4, 20}" minlength="4" maxlength="20" oninput="checkId();" required autofocus>
 			<div id="idOk"></div>
 			<label class="sr-only" for="password">비밀번호</label>
-			<input type="password" class="form-control center-block input-lg" name="password" id="password" placeholder="비밀번호를 입력하세요.(8~20자)" onkeyup="checkPwd();" minlength="8" maxlength="20" required>
+			<input type="password" class="form-control center-block input-lg" name="password" id="password" placeholder="비밀번호를 입력하세요.(8~20자)" oninput="checkPwd();" minlength="8" maxlength="20" required>
 			<label class="sr-only" for="password2">비밀번호확인</label>
-			<input type="password" class="form-control center-block input-lg" name="password2" id="password2" placeholder="비밀번호를 한번 더 입력하세요." onkeyup="checkPwd();" minlength="8" maxlength="20" required>
+			<input type="password" class="form-control center-block input-lg" name="password2" id="password2" placeholder="비밀번호를 한번 더 입력하세요." oninput="checkPwd();" minlength="8" maxlength="20" required>
 			<div id="pwdFalse"></div>
 			<div id="pwdOk"></div>
 			<label class="sr-only" for="name">이름</label>

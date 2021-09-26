@@ -79,35 +79,40 @@ public class VrList1Action implements CommandProcess {
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-			String id = request.getParameter("id");
-			int cnum=Integer.parseInt(request.getParameter("cnum"));
+		
 		try{
+			// 회원정보 가져오는 DAO메소드
+			String id = request.getParameter("id");
 			MemberDAO md = MemberDAO.getInstance();
 			Member member = new Member();
 			member = md.getUserInfo(id);
-			CafeDAO cd = CafeDAO.getInstance();
-			ReviewDAO rd=ReviewDAO.getInstance();
-			ReservationDAO rsd=ReservationDAO.getInstance();
+			int cnum=Integer.parseInt(request.getParameter("cnum"));
 			
+			CafeDAO cd = CafeDAO.getInstance();
 			Cafe cafe = cd.cafe_info(cnum);
-			int cafe_rate=cd.cafe_rate(cnum);				// cnum에 맞는 카페 평점 뿌려주기
-			List<Review> review=rd.review_view(cnum);		// cnum에 맞는 후기 보여줌
-			List<Theme> list = cd.v_select_theme(cnum);		// 선택된 vr 가게의 정보를 보여줌
-			int res_yn=rsd.res_yn(id, cnum);				//예약을 했다면 후기를 쓸 수 있음
-			int review_yn=rsd.review_yn(id, cnum);			//후기 썼으면 더이상 못 쓰게 막음
+			int cafe_rate=cd.cafe_rate(cnum);
+			ReviewDAO rd=ReviewDAO.getInstance();
+			List<Review> review=rd.review_view(cnum);		//카페에 맞는 후기 보여줌
+			List<Theme> list = cd.v_select_theme(cnum);
+			int num=cd.good_num(cnum);						//좋아요 개수 보여줌
+			ReservationDAO rsd=ReservationDAO.getInstance();
+			int res_yn=rsd.res_yn(id, cnum);			//예약을 했다면 후기를 쓸 수 있음
+			int review_yn=rsd.review_yn(id, cnum);		//후기 썼으면 더이상 못 쓰게 막음
 			System.out.println("res_yn->"+res_yn);
 			
+			request.setAttribute("member", member);
 			request.setAttribute("list", list);
 			request.setAttribute("cnum", cnum);
 			request.setAttribute("cafe", cafe);
 			request.setAttribute("review", review);
+			request.setAttribute("num", num);
 			request.setAttribute("res_yn", res_yn);
 			request.setAttribute("review_yn", review_yn);
 			request.setAttribute("cafe_rate", cafe_rate);
-			request.setAttribute("member", member);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
 		return "vrList1View.jsp";
 	}
+
 }

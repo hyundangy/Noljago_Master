@@ -11,29 +11,32 @@
 <script src="js/bootstrap.js"></script>
 <title>심심할땐? 놀자GO! : 자유게시판</title>
 <style type="text/css">
-/* 테이블 제목 */
-#boardImg {
-	margin-left: 5px;
-	width: 100px;
-	height: 100px;
+ul {
+	list-style-type: none;
 }
-h3 {
-	margin-top: 10px;
-	margin-bottom: 20px;
+
+.reply {
+	text-align: right;
+}
+
+.content_main {
+	cursor: pointer;
+}
+
+.content_main {
+	cursor: pointer;
 }
 /* 테이블 영역 */
 .cont-box {
-	margin-top: 65px;
 	width: 60%;
 }
 .cont-box table {
+	margin-top: 65px;
 	margin-bottom: 65px;
 }
 #bcont-table {
-	margin-top: 0;
 	border-top: 1px solid #ddd;
 }
-
 .cont-box th {
 	font-size: 2em;
 	border-bottom: none !important;
@@ -201,67 +204,6 @@ pre {
 	font-size: 14px;
 	padding-left: 50px;
 }
-/* 쪽지보내기 영역 */
-.dropdown-menu {
-	min-width: 0;
-}
-.cont-box .navbar-nav > li > a {
-	padding: 0;
-}
-.cont-box .navbar-nav > li > a:hover, .cont-box .navbar-nav > li > a:focus {
-	font-weight: bold;
-	background-color: white;
-}
-/* 글쓰기 모달 영역 */
-.write-box table {
-	border-bottom: 1px solid #ddd;
-}
-.write-box th {
-	padding: 20px !important;
-	width: 20%;
-	background-color: #005aa7;
-	color: white;
-}
-.write-box td {
-	padding: 20px !important;
-	background-color: #f4fbfb;
-}
-.write-box table > tbody > tr > th,
-.write-box table > tbody > tr > td {
-	vertical-align: middle;
-}
-#msgToid {
-	margin-top: 0;
-}
-/* 모달 헤더 */
-.modal-header{
-	background-color: #1ca2e3;	
-}
-.snd-title {
-	color: white;
-	font-weight: bold;
-}
-.btnGroup {
-	margin-left: 50px;
-}
-#rcvlist {
-	border: none;
-	font-size: 13px;
-	color: white;
-	background-color: #1ca2e3;
-}
-#writeCancle {
-	border: none;
-	font-size: 13px;
-	color: white;
-	background-color: #dc281e;
-}
-#writeButton {
-	border: none;
-	font-size: 13px;
-	color: white;
-	background-color: #005aa7;
-}
 </style>
 <script>
 	/* 댓글의 답변 쓰기 기능 */
@@ -352,10 +294,6 @@ pre {
 			return;
 		}
 	}
-	function reply() {
-		var toid = $("#reply").val();
-		$("#msgToid").val(toid);
-	}
 </script>
 </head>
 <%@include file="menu.jsp"%>
@@ -363,12 +301,6 @@ pre {
 <body>
 	<div class="container">
 		<div class="cont-box center-block">
-			<div class="row text-center">
-				<a><img src="images/board.svg" id="boardImg"></a>
-			</div>
-			<div class="row center-block">
-				<h3 class="text-center">자유 게시판</h3>
-			</div>
 			<div class="table-responsive">
 				<table class="table" id="bcont-table">
 					<thead>
@@ -377,17 +309,7 @@ pre {
 						</tr>
 						<tr>
 							<td>
-								<ul class="nav navbar-nav"><li class="dropdown"><a href="#" class="dropdown-toggle" id="idlist" data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false"><input type="hidden" id="reply" value="${board.id}">${board.id}<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<!-- <li><a href="#">프로필보기</a></li> -->
-							<c:if test="${id !=null && id != ''}">
-								<li><a href="#" data-target="#writeModal" data-toggle="modal" onclick="reply();">쪽지보내기</a></li>
-							</c:if>
-							<c:if test="${id ==null || id== ''}">
-								<li><a href="login.do">쪽지보내기</a></li>
-							</c:if>
-						</ul></li></ul>
+								<span id="bid">${board.id}</span>
 								<span id="bdate">${board.wdate}</span>
 								<span id="bcnt">${board.readcount} views</span>
 								<c:if test="${board.id != member.id || id == null || id == ''}">
@@ -395,7 +317,7 @@ pre {
 										class="btn btn-default btn-xs pull-right" id="noidlist">목록</a>
 								</c:if>
 								<c:if test="${board.id == member.id}">
-									<a href="boardList.do?bnum=${board.bnum}&pageNum=${pageNum}&id=${member.id}"
+									<a href="boardList.do?bnum=${board.bnum}&pageNum=${pageNum}"
 										class="btn btn-default btn-xs pull-right" id="noidlist">목록</a>
 									<a href="boardDeleteForm.do?bnum=${board.bnum}&pageNum=${pageNum}&ref=${board.ref}"
 											class="btn btn-default btn-xs pull-right" id="bdel">삭제</a>
@@ -429,7 +351,7 @@ pre {
 										<c:if test="${id == reply.id }">
 										<input type="hidden" id="re_bnum" value="${reply.bnum }">
 											<button type="button" class="btn btn-default btn-xs pull-right" id="reDel" onclick="replyDelete()">삭제</button>
-											<!-- <button type="button" class="btn btn-default btn-xs pull-right" id="reModi">수정</button> -->
+											<button type="button" class="btn btn-default btn-xs pull-right" id="reModi">수정</button>
 											<button type="button" class="btn btn-default btn-xs pull-right" id="id-reRe" onclick="reRe(${status.index});">답변</button>
 										</c:if>
 										<c:if test="${id != reply.id && id !=null && id !=''}">
@@ -466,7 +388,7 @@ pre {
 												<span id="redate">${re_reply.wdate}</span>
 												<c:if test="${id == re_reply.id }">
 													<button type="button" class="btn btn-default btn-xs pull-right" id="reDel" onclick="re_replyDelete()">삭제</button>
-													<!-- <button type="button" class="btn btn-default btn-xs pull-right" id="reModi">수정</button> -->
+													<button type="button" class="btn btn-default btn-xs pull-right" id="reModi">수정</button>
 												</c:if>
 											</td>
 										</tr>
@@ -515,44 +437,12 @@ pre {
 			</div>
 		</div>
 	</div>
-<!-- 쪽지보내기 -->
-<div class="row">
-	<div class="modal" id="writeModal" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<a class="snd-title">쪽지 보내기</a>
-					<button class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="write-box center-block">
-						<div id="writeOk" role="alert"></div>
-						<div class="table-responsive">
-							<table class="table">
-								<tbody>
-									<tr>
-										<th>받는이</th>
-										<td><input type="text" class="form-control center-block" id="msgToid" placeholder="쪽지를 받는 사람의 ID를 입력해주세요" required="required" style="width: 100%;">
-									</tr>
-									<tr>
-										<th>내 용</th>
-										<td><textarea class="form-control center-block" rows="5" cols="50" id="mcontent"></textarea></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="btnGroup text-center">
-							<button class="btn btn-default" id="writeButton" onclick="msgWrite()">보내기</button>
-							<button class="btn btn-default" id="writeCancle" onclick="document.getElementById('writeModal').style.display='none'">취 소</button>
-							<a href="messageList.do?id=${id}" class="btn btn-default pull-right" role="button" id="rcvlist">목 록</a>
-						</div>
-					</div>	
-				</div>
-			</div>
-		</div>
-	</div>
-</div>								
+								
 									
+									
+			
+	
+
 	<!---------------- C O N T E N T _ E N D------------------>
 </body>
 </html>

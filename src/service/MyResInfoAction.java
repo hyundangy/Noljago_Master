@@ -29,8 +29,6 @@ public class MyResInfoAction implements CommandProcess {
 			request.setAttribute("endtime", Integer.toString(reservation.getEndtime()));
 			request.setAttribute("pnum", Integer.toString(reservation.getPnum()));
 			request.setAttribute("cname", reservation.getCname());
-			request.setAttribute("cnum", Integer.toString(reservation.getCnum()));
-			request.setAttribute("type", reservation.getType());
 			request.setAttribute("tname", reservation.getTname());
 			request.setAttribute("count", Integer.toString(reservation.getCount()));
 			request.setAttribute("point", Integer.toString(reservation.getPoint()));

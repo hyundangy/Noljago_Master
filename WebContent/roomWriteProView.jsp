@@ -11,7 +11,7 @@
 <c:if test="${result>0 }">
 	<script type="text/javascript">
 		alert("소중한 의견 감사합니다.");
-		location.href="roomList.do?id=${id}&&cnum=${cnum}";
+		location.href="main.do";
 	</script>
 </c:if>
 <c:if test="${result==0 }">

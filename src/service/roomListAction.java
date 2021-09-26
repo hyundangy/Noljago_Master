@@ -11,7 +11,6 @@ import dao.Cafe;
 import dao.CafeDAO;
 import dao.Member;
 import dao.MemberDAO;
-import dao.ReservationDAO;
 import dao.Review;
 import dao.ReviewDAO;
 import dao.Theme;
@@ -37,20 +36,15 @@ public class roomListAction implements CommandProcess {
 			ReviewDAO rd=ReviewDAO.getInstance();
 			List<Review> review =rd.review_view(cnum);
 			Cafe cafe = cd.r_list3(cnum);
-			ReservationDAO rsd=ReservationDAO.getInstance();
-			int res_yn=rsd.res_yn(id, cnum);			//예약을 했다면 후기를 쓸 수 있음
-			int review_yn=rsd.review_yn(id, cnum);		//후기 썼으면 더이상 못 쓰게 막음
-			int cafe_rate=cd.cafe_rate(cnum);
-
+			
 			request.setAttribute("member", member);
+			
 			request.setAttribute("list", list);
 			request.setAttribute("cnum", cnum);
 			request.setAttribute("cafe", cafe);
 			request.setAttribute("review", review);
 			request.setAttribute("num", num);
-			request.setAttribute("res_yn", res_yn);
-			request.setAttribute("review_yn", review_yn);
-			request.setAttribute("cafe_rate", cafe_rate);
+			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

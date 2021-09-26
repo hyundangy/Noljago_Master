@@ -7,30 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>예약 목록</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <style type="text/css">
 table {
 	width: 100%;
 }
-body { background-color: white; font-size: 10pt; }
-table { background-color: #005aa7; }
-table a {
-	font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #58FA82;
-    }
-th{ color: white;}
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 10px;}
-.left { text-align: left; }
 </style>
 </head>
 <body>
-	<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 	<h2>예약 목록</h2>
 	<table>
 		<tr>
-			<td style = "background-color:#D8D8D8"><a href = 'amReservationAddForm.do?id=${id}&pageNum=${pageNum}' style="text-decoration: none;">신규 예약</a></td>
+			<td><a href = 'amReservationAddForm.do?id=${id}&pageNum=${pageNum}'>신규 예약</a></td>
 		</tr>
 	</table>
 	<table>
@@ -43,12 +31,11 @@ td { background-color: white; text-align: center; padding: 10px;}
 			<th>테마 번호</th>
 			<th>사용 시간</th>
 		</tr>
-		
 		<c:if test = "${totCnt > 0}">
 			<c:forEach var = "reserv" items = "${list }">
 				<tr>
-					<td width = 200 style = "background-color:#D8D8D8">
-					<a href = 'amReservationDetail.do?id=${id}&resno=${reserv.resno}&pageNum=${currentPage}' style="text-decoration: none;"  >
+					<td width = 200>
+					<a href = 'amReservationDetail.do?id=${id}&resno=${reserv.resno}&pageNum=${currentPage}'>
 						${reserv.resdate}</a>
 					</td>
 					<td>${reserv.resno}</td>
@@ -63,7 +50,7 @@ td { background-color: white; text-align: center; padding: 10px;}
 		</c:if>
 		<c:if test = "${totCnt == 0}">
 			<tr>
-				<td colspan = 7>예약한 손님이 없습니다.</td>
+				<td colspan = 6>예약한 손님이 없습니다.</td>
 			</tr>
 		</c:if>
 	</table>

@@ -141,7 +141,7 @@
 		font-weight: bold;
 		color: #dc281e;
 	}
-	#writeReview {
+	#resCancle, #writeReview {
 		border: none;
 		width: 100px;
 		padding-top: 10px;
@@ -151,33 +151,15 @@
 		color: white;
 		background-color: #005aa7;
 	}
-	#resCancle {
-		border: none;
-		width: 100px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin-bottom: 20px;
-		font-size: 13px;
-		color: white;
-		background-color: #dc281e;
-	}
 	#cancleOk {
 		margin-bottom: 20px;
 	}
 	#first-td {
 		width: 30%;
 	}
-	.modal-header{
-		background-color: #1ca2e3;	
-	}
-	.modal-header a {
-		color: white;
-		font-weight: bold;
-	}
 	</style>
 	<script type="text/javascript">
 		/* 상세보기 버튼 눌렀을시에 해당 로우의 예약번호를 가져와 정보를 조회 */
-		
 		function getResNo(index) {
 			var i = index;
 			var resno = $("#"+i).text();
@@ -186,7 +168,6 @@
 				$("#resno").text(list.resno);
 				$("#resno").val(list.resno);
 				$("#cname").text(list.cname);
-				$("#cnum").val(list.cnum);
 				$("#tname").text(list.tname);
 				if(list.pnum == 0) {
 					$("#pnum").text("파티에 속해있지 않습니다").css("color", "#dc281e");
@@ -204,24 +185,10 @@
 				$("#resdate").text(list.resdate);
 				$("#time").text(list.starttime+" ~ "+list.endtime);
 				$("#pay").text(list.point+"원");
-				$("#cnum").val(list.cnum);
-				
-				$("#writeReview").click(function(){
-					var cnum = $("#cnum").val();
-					if(list.type =="vr") {
-						var fname = document.fname;
-						fname.action = "vrList1View.do?id=${id}&cnum="+cnum;
-						fname.submit();
-					} else if (list.type == "room") {
-						var fname = document.fname;
-						fname.action = "roomList.do?id=${id}&cnum="+cnum;
-						fname.submit();
-					}
-				});
 			});
 		}
 		/* 예약취소 펑션  */
-		function resCan() {
+		function resCancle() {
 			var resno = $("#resno").val();
 			$.post('myresInfo.do?id=${id}', {resno:resno}, function(msg){
 				var list = JSON.parse(msg);
@@ -233,14 +200,16 @@
 						return;
 					}
 				} else {	//파티에 속해있지 않을 때 
+					
 					if(confirm("예약을 취소하시겠습니까? 포인트는 환불되니 걱정말라Go!")) {
+						
 						$.post('myrescancle.do?id=${id}',{resno:resno}, function(result){
 							//result + " " + point라는 string으로 돌려받음
 							var str = result.trim();
 							var strarray = str.split(" ");
 							if(strarray[0] == "1") {
 								$("#cancleOk").text("예약이 성공적으로 취소되었습니다. " + strarray[1] + "포인트를 환불받았습니다.").css("color", "#2cb5e8").css("font-size", "16px");
-								setTimeout("location.reload()", 2000);
+								setTimeout("location.reload()", 3000);
 							} else {
 								$("#cancleOk").text("예약 취소가 실패하였습니다.").css("color", "#dc281e").css("font-size", "12px");
 							}
@@ -251,6 +220,8 @@
 					}
 				}
 			})
+			
+			
 		}
 		
 		function go_url(){
@@ -391,7 +362,7 @@
 									<tbody>
 										<tr>
 											<td>예약 번호</td>
-											<td id="resno"><input type="hidden" id="hideresno"></td>
+											<td id="resno"></td>
 										</tr>
 										<tr>
 											<td>카페 이름</td>
@@ -425,11 +396,8 @@
 								</table>
 								<div class="text-center" id="cancleOk"></div>
 								<div class="row center-block text-center">
-									<form action="" name="fname" method="post">
-										<input type="hidden" id="cnum" value="">
-										<button type="button" class="btn btn-default" id="resCancle" onclick="resCan();">예약 취소</button>
-										<button type="button" class="btn btn-default" id="writeReview">후기 남기기</button>
-									</form>
+									<button type="button" class="btn btn-default" id="resCancle" onclick="resCancle();">예약 취소</button>
+									<button type="button" class="btn btn-default" id="writeReview">후기 남기기</button>
 								</div>
 							</div>
 						</div>

@@ -24,8 +24,7 @@ public class PartyMineAction implements CommandProcess {
 			MemberDAO md = MemberDAO.getInstance();
 			Member member = new Member();
 			member = md.getUserInfo(id);
-			int totCnt  = pd.getTotalMyCnt(id);
-			System.out.println(totCnt);
+			int totCnt  = pd.getTotalCnt();			
 			String pageNum = request.getParameter("pageNum");	
 			if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
 			int currentPage = Integer.parseInt(pageNum);	
@@ -40,7 +39,6 @@ public class PartyMineAction implements CommandProcess {
 			int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
 			int endPage = startPage + blockSize -1;	
 			if (endPage > pageCnt) endPage = pageCnt;
-			System.out.println("startpage->" + startPage);
 			
 			request.setAttribute("member", member);
 			request.setAttribute("totCnt", totCnt);
@@ -49,8 +47,8 @@ public class PartyMineAction implements CommandProcess {
 			request.setAttribute("startNum", startNum);
 			request.setAttribute("blockSize", blockSize);
 			request.setAttribute("pageCnt", pageCnt);
-			request.setAttribute("startPage", 1);
-			request.setAttribute("endPage", 1);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
 			request.setAttribute("list", list);
 			request.setAttribute("count", count);
 			request.setAttribute("memList", memList);

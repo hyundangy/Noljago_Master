@@ -5699,7 +5699,7 @@ button.close {
   border: 0;
 }
 .modal-open {
-  overflow: auto;
+  overflow: hidden;
 }
 .modal {
   position: fixed;
@@ -5709,7 +5709,7 @@ button.close {
   left: 0;
   z-index: 1040;
   display: none;
-  overflow: auto;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }

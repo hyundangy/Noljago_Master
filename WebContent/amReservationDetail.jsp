@@ -9,14 +9,8 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <style type="text/css">
 table {
-	width: 25%;
+	width: 80%;
 	}
-body { background-color: white; font-size: 10pt; }
-table { background-color: #005aa7; margin-left: 550px; }
-th{ color: white;}
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 10px;}
-.left { text-align: left; }
 </style>
 
 <script type="text/javascript">
@@ -32,7 +26,6 @@ td { background-color: white; text-align: center; padding: 10px;}
 
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 <table border = "1">
 	<caption><h2>예약 정보 상세 내역</h2></caption>
 	<tr><td width = "100">예약 날짜</td><td>${reserv.resdate}</td></tr>
@@ -45,11 +38,11 @@ td { background-color: white; text-align: center; padding: 10px;}
 	<tr><td>예약 번호</td><td>${reserv.resno}</td></tr>
 	<tr><td>인원 수</td><td>${reserv.count}</td></tr>
 	<tr><td>포인트</td><td>${reserv.point}</td></tr>
-	<form name = "reservdeleteform" method = "post" action = "amReservationDeletePro.do?reservpoint=${reserv.point }&reservid=${reserv.id }&resno=${reserv.resno}&id=${id}&pageNum=${pageNum}">
+	<form name = "reservdeleteform" method = "post" action = "amReservationDeletePro.do?resno=${reserv.resno}&id=${id}&pageNum=${pageNum}">
 	<tr><td colspan = "2">
-	<input type = "button" value = "수정" style="color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0;" onclick = "location.href='amReservationUpdateForm.do?resno=${reserv.resno}&id=${id}&pageNum=${pageNum}'">
-	<input type = "button" value = "삭제" style="margin-left:20px; color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0;" onclick = "javascript:reservDelete()">
-	<input type = "button" value = "목록" style="margin-left:20px; color:white; background-color: #005aa7; text-decoration:none; border: 0; outline: 0;" onclick = "location.href='amReservationList.do?id=${id}&pageNum=${pageNum}'">
+	<input type = "button" value = "수정" onclick = "location.href='amReservationUpdateForm.do?resno=${reserv.resno}&id=${id}&pageNum=${pageNum}'">
+	<input type = "button" value = "삭제" onclick = "javascript:reservDelete()">
+	<input type = "button" value = "목록" onclick = "location.href='amReservationList.do?id=${id}&pageNum=${pageNum}'">
 	</td></tr>
 	</form>
 </table>

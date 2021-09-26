@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Board;
 import dao.BoardDAO;
-import dao.Member;
-import dao.MemberDAO;
 
 public class BoardWriterProAction implements CommandProcess {
 
@@ -18,10 +16,6 @@ public class BoardWriterProAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
-			String id = request.getParameter("id");
-			MemberDAO md = MemberDAO.getInstance();
-			Member member = new Member();
-			member = md.getUserInfo(id);
 			Board board = new Board();
 			String pageNum = request.getParameter("pageNum");
 			board.setBnum(Integer.parseInt(request.getParameter("bnum")));
@@ -36,7 +30,6 @@ public class BoardWriterProAction implements CommandProcess {
 			request.setAttribute("bnum", board.getBnum());
 			request.setAttribute("result", result);
 			request.setAttribute("pageNum", pageNum);
-			request.setAttribute("member", member);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

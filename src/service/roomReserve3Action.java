@@ -99,7 +99,6 @@ public class roomReserve3Action implements CommandProcess {
 				}
 			}
 			
-			member = md.getUserInfo(id);
 			request.setAttribute("member", member);
 			
 			request.setAttribute("cnum", cnum);

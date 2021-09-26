@@ -14,18 +14,28 @@
 	<style type="text/css">
 	#name{font-size: 30px;}
 	#t1{
-		margin-left: 500px;
+		margin-left: 100px;
 		/* margin-top: 150px; */
 	    border-spacing: 40px;
 	    border-collapse: separate;
 
 	}
 	#t2{
-		margin-top: 40px;
+		/* margin-left: 20px; */
+		margin-top: 40px; 
 	}
+	#tnameM{
+		margin-bottom: 20px;
+	}
+	
+	
 	
 	/* 카페 리스트 출력  */
 	#tables{ float: left; display: inline;}
+	
+	
+	
+	
 	
 	/* 예약 버튼  */
 	.button {
@@ -50,7 +60,7 @@
 	   font-family: helvetica, serif;
 	   text-decoration: none;
 	   vertical-align: middle;
-	}
+	   }
 	.button:hover {
 	   border: 0px solid #0a3c59;
 	   text-shadow: #ffffff 0 1px 0;
@@ -75,29 +85,10 @@
 	   background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%);
 	   color: #db2c69;
 	   }
-	.table-responsive {
-		margin-bottom: 65px;
-	}
 	
-	.res-box {
-		margin-top: 50px;
-		width: 50%;
-	}   
-	#resButton {
-		border: none;
-		color: white;
-		font-weight: bold;
-		background-color: #db2c69;
-	}
-	#like_cnt {
-		margin-bottom: 0;
-	}
-	#content {
-		font-size: 14px !important;
-	}
-	textarea {
-		font-size: 14px;
-	}
+	
+	
+	
 	</style>
 </head>
 <script type="text/javascript">
@@ -108,11 +99,11 @@ function like() {
 			var likeCnt = numArr[0];
 			var result = numArr[1];
 			if(result == "1") {
-				$("#like_cnt").text("좋아요 : "+likeCnt+"개");
+				$("#like_cnt").text(likeCnt+"개");
 				$("#img1").attr("src", "images/like2.png");
 			}else if(result=="0"){
 				$.post('vrLike2.do?id=${id}&cnum=${cnum}&tnum=${tnum}', function(msg){
-					$("#like_cnt").text("좋아요 : "+likeCnt+"개");
+					$("#like_cnt").text(likeCnt+"개");
 					$("#img1").attr("src", "images/like.png");
 					location.reload();
 				});
@@ -123,13 +114,11 @@ function like() {
 <%@include file="menu.jsp" %>
 <%------------ B O D Y ------------%>
 <body>
-<div class="container-fluid">
-	<div class="table-responsive">
 	<table id="tables">
 		<tr>
 			<td>
 				<table id="t1">
-						<tr id="name">
+						<tr id="name" style="text-align: center;">
 							<td id="tnameM" colspan="2"><b>${theme.tname }</b>
 							<span style="color: #707070; font-size: 20px;"> - ${cafe.cname }
 							</span>
@@ -146,49 +135,49 @@ function like() {
 				<table id="t2">
 					<tr>
 						<td id="content"><h4>
-						<textarea style="resize: none; wrap:hard; background-color: white; border-color: white; line-height: 3em;" rows="8" cols="50" name="contents" readonly="readonly" disabled="disabled">${theme.tcontent}
+						<textarea style="resize: none; wrap:hard; background-color: white; border-color: white; line-height: 3em;" rows="8" cols="70" name="contents" readonly="readonly" disabled="disabled">${theme.tcontent}
 						</textarea></h4>
 					</tr>
 					<tr>
-						<td id="content" style="font-size: 20px; color: gray;">최대 인원  : ${theme.headcount }</td>
+						<td id="content">최대 인원: ${theme.headcount }</td>
 						
 					</tr>
 					<tr>
-						<td id="content" style="font-size: 20px; color: gray;">난이도  : <c:choose>
+						<td id="content">난이도: <c:choose>
 								<c:when test="${theme.score1 eq 1 }">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 2}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 3}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 4}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/e_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/e_star.png" width="15" height="20">
 								</c:when>
 								<c:when test="${theme.score1 eq 5}">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
-									<img src="images/f_star.png" width="25" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
+									<img src="images/f_star.png" width="15" height="20">
 								</c:when>
 							</c:choose>
 						</td>
@@ -197,24 +186,17 @@ function like() {
 			</td>
 		</tr>
 	</table>
-	
-	
-		<div class="res-box center-block text-center form-inline">
-			<div class="form-group text-center" style="margin-right: 30px;">
-				<c:if test="${good_y==1 }">	<!-- 들어간 테마가 좋아요 클릭한 상태이면 꽉찬 하트 -->
-					<a id="btn_like" onclick="like();"><img src="images/like2.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
-				</c:if>
-				<c:if test="${good_y==0 }">	<!-- 아니면 빈 하트 -->
-					<a id="btn_like" onclick="like();"><img src="images/like.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
-				</c:if>
-				<p id="like_cnt">좋아요 : ${num}개</p>
-			</div>
-			<div class="form-group text-center">
-				<a href="roomReserveForm.do?id=${id }&&cnum=${theme.cnum }&&tnum=${theme.tnum}" class="btn btn-default btn-lg" id="resButton">RESERVE</a>
-			</div>
-		</div>
+	<div style="margin-bottom: 100px;">
+		<c:if test="${good_y==1 }">	<!-- 들어간 테마가 좋아요 클릭한 상태이면 -->
+			<a id="btn_like" style="margin-left: 620px;" onclick="like();"><img src="images/like2.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
+		</c:if>
+		<c:if test="${good_y==0 }">	<!-- 아니면 -->
+			<a id="btn_like" style="margin-left: 620px;" onclick="like();"><img src="images/like.png" id="img1" width="40" height="40" style=" background-color: white;"></a>
+		</c:if>
+		<a href="roomReserveForm.do?id=${id }&&cnum=${theme.cnum }&&tnum=${theme.tnum}" style="margin-left: 80px; margin-right: 20px; text-decoration:none;"  class="button">RESERVE</a>
+		<p id="like_cnt" style="margin-left: 600px;">좋아요 : ${num}개</p>
 	</div>
-</div>	
+	
 </body>
 </html>
 <%@include file="footer.jsp" %>

@@ -8,30 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>카페 목록</title>
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <style type="text/css">
 table {
 	width: 100%;
 }
-table a {
-	font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #58FA82;
-    }
-body { background-color: white; font-size: 10pt; }
-table { background-color: #005aa7; }
-th{ color: white;}
-tr:hover { background-color: white; }
-td { background-color: white; text-align: center; padding: 10px;}
-.left { text-align: left; }
 </style>
 </head>
 <body>
-<input type = "button" onclick = "location='loginAction.do?id=${id}&password=${password}'" value = "메인">
 	<h2>카페 목록</h2>
 	<table>
 		<tr>
-			<td style = "background-color:#D8D8D8"><a href = "amCafeAddForm.do" style="text-decoration: none;">카페 추가</a></td>
+			<td><a href = "amCafeAddForm.do">카페 추가</a></td>
 		</tr>
 	</table>
 	<table>
@@ -47,8 +35,8 @@ td { background-color: white; text-align: center; padding: 10px;}
 			<c:when test = "${totCnt > 0}">  <!-- 널 체크 -->
 				<c:forEach var = "cafe" items = "${list }">
 					<tr>
-						<td width = 200 style = "background-color:#D8D8D8">
-							<a href = 'amCafeDetail.do?cnum=${cafe.cnum}&pageNum=${currentPage}' style="text-decoration: none;">
+						<td width = 200>
+							<a href = 'amCafeDetail.do?cnum=${cafe.cnum}&pageNum=${currentPage}'>
 							${cafe.cnum}</a>
 						</td>
 						<td>${cafe.cname }</td>

@@ -21,10 +21,7 @@ public class AmReservationListAction implements CommandProcess {
 		MemberDAO md = MemberDAO.getInstance();
 		try {
 			String id = request.getParameter("id");
-			String password = md.getpassword(id); 
-			System.out.println();
 			System.out.println(id);
-			System.out.println(password);
 			String pageNum = request.getParameter("pageNum");
 			if (pageNum == null || pageNum.equals("")) {
 				pageNum = "1";
@@ -65,7 +62,6 @@ public class AmReservationListAction implements CommandProcess {
 		
 			
 			request.setAttribute("id", id);
-			request.setAttribute("password", password);
 			request.setAttribute("admin", admin);
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
@@ -79,7 +75,6 @@ public class AmReservationListAction implements CommandProcess {
 			
 			System.out.println("-----------------------------------------------");
 			System.out.println("id-->" + id);
-			System.out.println("password-->" + password);
 			System.out.println("admin-->" + admin); 
 			System.out.println("startNum-->" + startNum);  
 			System.out.println("totCnt-->" + totCnt); 

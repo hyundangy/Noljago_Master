@@ -18,8 +18,6 @@ public class AmCafeListAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		CafeDAO cd = CafeDAO.getInstance();
 		try {
-			String id = "aa";
-			String password = "1234";
 			int totCnt = cd.getTotalCnt();
 			String pageNum = request.getParameter("pageNum");
 			if (pageNum == null || pageNum.equals("")) {
@@ -44,8 +42,6 @@ public class AmCafeListAction implements CommandProcess {
 			if(endPage>pageCnt)
 				endPage=pageCnt;
 			
-			request.setAttribute("id", id);
-			request.setAttribute("password", password);
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);

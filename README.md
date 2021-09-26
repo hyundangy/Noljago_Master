@@ -1,19 +1,36 @@
-Author : Hyun Suk Bang
+Noljago Project (놀자고 프로젝트)
+=====
 
-For Studying Purpose of Noljago team. Credits go to the whole study team member: Hyun Suk Bang, Jin Ah Jang, Do Young Kim, Min Gu Jeon Noljago Project is to reserve Room Cafe & VR Cafe. Utilized JSP, JavaScript, Jquery, Ajax, OracleDB
+### Community Website for Developers
+### Author: Hyun Suk Bang  
 
-[20210918] Source Refactored : Added some comments to remind myself --> HSBang
+Noljago Project is to reserve Room Cafe & VR Cafe. Utilized JSP, JavaScript, Jquery, Ajax, OracleDB  
+For Studying Purpose of Noljago team.  
+Credits go to the whole study team member: Hyun Suk Bang, Jin Ah Jang, Do Young Kim, Min Gu Jeon  
 
-[20210501] Done Refactoring. Everything's working fine!!!
+#### Technologies Used
+* JSP & Servlet JDBC
+* JavaScript
+* Ajax
+* OracleDB
+* HTML5
+* CSS
+* Apache Tomcat
+* Eclipse IDE
+* tortoise SVN
 
-[20210408] Finished all the Controllers (Back-end Logics)
-
-[20210401] Finished all the Views (Front-end pages)
-
-[20210313] Finished adding Models (DAOs, DBs)
-
-[20210221] Created all the skeletons
-
-[20210213] Added & Correlate ERD tables into OracleDB
-
-[20210202] Finished Planning, SW Brainstorming
+#### Main Function
+* Sign Up
+* Log in (Session)
+* User Add/Update/Delete
+* VR & Room Cafe Add/Update/Delete
+  * Reservation System
+  * Like/Unlike
+  * Comment & Rate 
+* Post Add/Update/Delete
+  * Like/Unlike
+  * Comment & Rate
+* Search Engine
+  * Auto-Complete Words with AJAX
+  * Search by Cafe Types, Location
+  * GPS Marker using Naver Map API
